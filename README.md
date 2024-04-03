@@ -1,0 +1,2 @@
+# stockbot
+Stock Tracking Bot
