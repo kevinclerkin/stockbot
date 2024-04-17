@@ -22,6 +22,22 @@ namespace StockBotAPI.Controllers
             var stockList = _context.Stocks.ToList();
             
             return Ok(stockList);
+
+        }
+
+        [HttpGet("{id}")]
+
+        public IActionResult GetById(int id)
+        {
+            var stock = _context.Stocks.FirstOrDefault(x => x.Id == id);
+
+            if(stock == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(stock);
+
         }
     }
 }
