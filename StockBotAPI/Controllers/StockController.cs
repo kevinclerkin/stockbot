@@ -4,7 +4,7 @@ using StockBotAPI.Data;
 
 namespace StockBotAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/stock")]
     [ApiController]
     public class StockController : ControllerBase
     {
