@@ -6,6 +6,6 @@ namespace StockBotAPI.Interfaces
     {
         Task<List<Stock>> GetAsync();
 
-        Task<Stock> GetByIdAsync(int id);
+        Task<Stock?> GetByIdAsync(int id);
     }
 }
