@@ -1,18 +1,29 @@
-﻿using StockBotAPI.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using StockBotAPI.Data;
+using StockBotAPI.Interfaces;
 using StockBotAPI.Models;
 
 namespace StockBotAPI.Repositories
 {
     public class StockRepository : IStockRepository
     {
-        public Task<List<Stock>> GetAsync()
+        private readonly ApplicationDbContext _context;
+        public StockRepository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task<List<Stock>> GetAsync()
+        {
+            return await _context.Stocks.ToListAsync();
+
+            
         }
 
-        public Task<Stock> GetByIdAsync(int id)
+        public async Task<Stock?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Stocks.FirstOrDefaultAsync(i => i.Id == id);
+
+           
         }
     }
 }

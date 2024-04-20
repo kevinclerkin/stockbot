@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StockBotAPI.Data;
+using StockBotAPI.Interfaces;
 
 namespace StockBotAPI.Controllers
 {
@@ -9,17 +10,21 @@ namespace StockBotAPI.Controllers
     public class StockController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public StockController(ApplicationDbContext context)
+
+        private readonly IStockRepository _stockRepo;
+        public StockController(ApplicationDbContext context, IStockRepository stockRepo)
         {
             _context = context;
+
+            _stockRepo = stockRepo;
             
         }
 
         [HttpGet]
 
-        public IActionResult Get()
+        public async Task<IActionResult> GetAsync()
         {
-            var stockList = _context.Stocks.ToList();
+            var stockList = await _stockRepo.GetAsync();
             
             return Ok(stockList);
 
@@ -27,9 +32,9 @@ namespace StockBotAPI.Controllers
 
         [HttpGet("{id}")]
 
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var stock = _context.Stocks.FirstOrDefault(x => x.Id == id);
+            var stock = await _stockRepo.GetByIdAsync(id);
 
             if(stock == null)
             {
