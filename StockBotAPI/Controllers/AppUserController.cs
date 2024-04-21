@@ -47,7 +47,17 @@ namespace StockBotAPI.Controllers
                     
                     if (assignedRole.Succeeded)
                     {
-                        return Ok("User Registered");
+                        return Ok(
+                            new NewUserDTO
+                            {
+                                UserName = appUser.UserName, 
+                                
+                                Email = appUser.Email,
+
+                                Token = _tokenService.CreateToken(appUser)
+
+                            }
+                        );
                     }
                     else
                     {
