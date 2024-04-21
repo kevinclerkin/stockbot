@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StockBotAPI.DTO;
+using StockBotAPI.Interfaces;
 using StockBotAPI.Models;
 
 namespace StockBotAPI.Controllers
@@ -11,9 +12,13 @@ namespace StockBotAPI.Controllers
     public class AppUserController : ControllerBase
     {
         private readonly UserManager<AppUser> _userManager;
-        public AppUserController(UserManager<AppUser> userManager)
+
+        private readonly ITokenService _tokenService;
+        public AppUserController(UserManager<AppUser> userManager, ITokenService tokenService)
         {
             _userManager = userManager;
+
+            _tokenService = tokenService;
         }
 
         [HttpPost("register")]

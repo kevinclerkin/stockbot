@@ -6,6 +6,7 @@ using StockBotAPI.Data;
 using StockBotAPI.Interfaces;
 using StockBotAPI.Models;
 using StockBotAPI.Repositories;
+using StockBotAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IStockRepository, StockRepository>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
