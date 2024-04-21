@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure.Identity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StockBotAPI.DTO;
 using StockBotAPI.Interfaces;
 using StockBotAPI.Models;
@@ -14,7 +16,9 @@ namespace StockBotAPI.Controllers
         private readonly UserManager<AppUser> _userManager;
 
         private readonly ITokenService _tokenService;
-        public AppUserController(UserManager<AppUser> userManager, ITokenService tokenService)
+
+        private readonly SignInManager<AppUser> _signInManager;
+        public AppUserController(UserManager<AppUser> userManager, ITokenService tokenService, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
 
@@ -75,5 +79,36 @@ namespace StockBotAPI.Controllers
 
             }
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var loggedUser = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName ==  loginDTO.UserName.ToLower());
+
+            if(loggedUser == null)
+            {
+                return Unauthorized();
+            }
+
+            var userSignIn = await _signInManager.CheckPasswordSignInAsync(loggedUser, loginDTO.Password, false);
+
+            if (!userSignIn.Succeeded)
+            {
+                return Unauthorized("Username or password is incorrect!");
+            }
+
+            return Ok(
+                new NewUserDTO
+                {
+                    UserName = loggedUser.UserName,
+                    Email = loggedUser.Email,
+                    Token = _tokenService.CreateToken(loggedUser)
+                });
+        }
+       
     }
 }
