@@ -6,9 +6,9 @@ interface Props {}
 const CardList = (props: Props) => {
   return (
     <div>
-    <Card />
-    <Card />
-    <Card />
+    <Card companyName='AMZN' stockPrice={1173}  />
+    <Card companyName='AAPL' stockPrice={877} />
+    <Card companyName='MSFT' stockPrice={216} />
     
     </div>
   )
