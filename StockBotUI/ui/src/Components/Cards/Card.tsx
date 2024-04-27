@@ -15,7 +15,7 @@ const Card = ({companyName, stockPrice}: Props) => {
       </div>
       <div className="card-body">
         <h3>{companyName}</h3>
-        <p>{stockPrice}</p>
+        <p>${stockPrice}</p>
       </div>
     </div>
   )
