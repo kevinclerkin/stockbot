@@ -5,11 +5,13 @@ import { v4 as uuidv4 } from "uuid";
 
 interface Props {
   searchResults: Company[];
+  onPortfolioAdd: (e: SyntheticEvent) => void;
   
 }
 
 const CardList: React.FC<Props> = ({
   searchResults,
+  onPortfolioAdd,
 }: Props): JSX.Element => {
   return (
     <div>
@@ -20,6 +22,7 @@ const CardList: React.FC<Props> = ({
               id={result.symbol}
               key={uuidv4()}
               searchResult={result}
+              onPortfolioAdd={onPortfolioAdd}
             />
           );
         })

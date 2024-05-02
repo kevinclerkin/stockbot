@@ -23,11 +23,17 @@ function App() {
         }
         console.log(searchResults);
     }
+
+    const onPortfolioAdd = (e: SyntheticEvent) => {
+        e.preventDefault();
+        console.log(e);
+    }
+  
   return (
     <div className="App">
       <Search onClick={onClick} search={search} onHandleChange={onHandleChange} />
       {serverError && <h1>{serverError}</h1>}
-      <CardList searchResults={searchResults} />
+      <CardList searchResults={searchResults} onPortfolioAdd={onPortfolioAdd} />
     </div>
   );
 }
