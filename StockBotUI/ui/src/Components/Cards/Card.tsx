@@ -1,21 +1,22 @@
 import React from 'react'
 import './Card.css'
+import { Company } from '../../company';
 
 interface Props {
-  companyName: string;
-  stockPrice: number;
+  id: string;
+  searchResult: Company;
 
 }
 
-const Card = ({companyName, stockPrice}: Props) => {
+const Card = ({id, searchResult}: Props) => {
   return (
     <div className="card">
       <div className="card-header">
         <h2>Stock</h2>
       </div>
       <div className="card-body">
-        <h3>{companyName}</h3>
-        <p>${stockPrice}</p>
+        <h3>{searchResult.name}</h3>
+        <p>${searchResult.stockExchange}</p>
       </div>
     </div>
   )

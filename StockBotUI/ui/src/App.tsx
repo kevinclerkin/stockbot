@@ -8,7 +8,7 @@ import { searchCompany } from './FinPrepAPI';
 function App() {
   const [search, setSearch] = React.useState<string>('');
   const [searchResults, setSearchResults] = React.useState<Company[]>([]);
-  const [serverError, setServerError] = React.useState<string>('');
+  const [serverError, setServerError] = React.useState<string | null>(null);
     const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
         console.log(e);
@@ -27,7 +27,7 @@ function App() {
     <div className="App">
       <Search onClick={onClick} search={search} onHandleChange={onHandleChange} />
       {serverError && <h1>{serverError}</h1>}
-      <CardList />
+      <CardList searchResults={searchResults} />
     </div>
   );
 }

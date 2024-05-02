@@ -1,17 +1,35 @@
-import React from 'react'
-import Card from '../Cards/Card'
+import React, { SyntheticEvent } from "react";
+import Card from "../Cards/Card";
+import { Company } from "../../company";
+import { v4 as uuidv4 } from "uuid";
 
-interface Props {}
-
-const CardList = (props: Props) => {
-  return (
-    <div>
-    <Card companyName='AMZN' stockPrice={1173}  />
-    <Card companyName='AAPL' stockPrice={877} />
-    <Card companyName='MSFT' stockPrice={216} />
-    
-    </div>
-  )
+interface Props {
+  searchResults: Company[];
+  
 }
 
-export default CardList
+const CardList: React.FC<Props> = ({
+  searchResults,
+}: Props): JSX.Element => {
+  return (
+    <div>
+      {searchResults.length > 0 ? (
+        searchResults.map((result) => {
+          return (
+            <Card
+              id={result.symbol}
+              key={uuidv4()}
+              searchResult={result}
+            />
+          );
+        })
+      ) : (
+        <p className="mb-3 mt-3 text-xl font-semibold text-center md:text-xl">
+          No results!
+        </p>
+      )}
+    </div>
+  );
+};
+
+export default CardList;
