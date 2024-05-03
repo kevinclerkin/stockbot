@@ -5,6 +5,7 @@ import Search from './Components/Search/Search';
 import { Company } from './company';
 import { searchCompany } from './FinPrepAPI';
 import PortfolioList from './Components/Portfolio/PortfolioList/PortfolioList';
+import NavBar from './Components/NavBar/NavBar';
 
 function App() {
   const [search, setSearch] = React.useState<string>('');
@@ -44,6 +45,7 @@ function App() {
   
   return (
     <div className="App">
+      <NavBar />
       <Search onSearchSubmit={onSearchSubmit} search={search} onHandleSearchChange={onHandleSearchChange} />
       <PortfolioList portfolio={portfolio} onPortfolioRemove={onPortfolioRemove}/>
       {serverError && <h1>{serverError}</h1>}
