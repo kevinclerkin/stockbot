@@ -10,7 +10,9 @@ const RemovePortfolio = ({onPortfolioRemove, portfolioItem}: Props) => {
     <div>
         <form onSubmit={onPortfolioRemove}>
             <input hidden={true} value={portfolioItem} />
-            <button>Remove</button>
+            <button className="block w-full py-3 text-white duration-200 border-2 rounded-lg bg-black-500 hover:text-red-500 hover:bg-white border-red-500">
+          Remove
+        </button>
         </form>
     </div>
   )
