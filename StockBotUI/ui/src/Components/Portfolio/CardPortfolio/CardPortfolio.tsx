@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 
 interface Props {
     portfolio: string;
+    onPortfolioRemove: (e: SyntheticEvent) => void;
 }
 
-const CardPortfolio = ({portfolio}: Props) => {
+const CardPortfolio = ({portfolio, onPortfolioRemove}: Props) => {
   return (
     <div>{portfolio}</div>
   )
