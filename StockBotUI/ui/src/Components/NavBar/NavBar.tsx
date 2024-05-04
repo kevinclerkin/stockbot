@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 interface Props {}
 
@@ -10,7 +11,9 @@ const NavBar = (props: Props) => {
             <img src="" alt="" />
             <div className="hidden font-bold lg:flex">
               <a href="" className="text-black hover:text-darkBlue">
+                <Link to="/search">
                 Dashboard
+                </Link>
               </a>
             </div>
           </div>

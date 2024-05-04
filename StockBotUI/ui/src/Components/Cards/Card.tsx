@@ -2,6 +2,7 @@ import React from 'react'
 import './Card.css'
 import { Company } from '../../company';
 import AddPortfolio from '../Portfolio/AddPortfolio';
+import { Link } from 'react-router-dom';
 
 interface Props {
   id: string;
@@ -17,9 +18,9 @@ const Card = ({id, searchResult, onPortfolioAdd}: Props) => {
       key={id}
       id={id}
     >
-      <h2 className="font-bold text-center text-veryDarkViolet md:text-left">
+      <Link to={`/stock/${searchResult.symbol}`} className="font-bold text-center text-veryDarkViolet md:text-left">
         {searchResult.name} ({searchResult.symbol})
-      </h2>
+      </Link>
       <p className="text-veryDarkBlue">{searchResult.currency}</p>
       <p className="font-bold text-veryDarkBlue">
         {searchResult.exchangeShortName} - {searchResult.stockExchange}
