@@ -1,35 +1,62 @@
-import React from 'react'
+import { Link } from 'react-router-dom'
+import { FaHome, FaMoneyBill, FaRegNewspaper } from 'react-icons/fa'
+import { SlGraph } from 'react-icons/sl'
+import { FcMoneyTransfer } from "react-icons/fc"
+import {MdOutlineAccountBalance} from 'react-icons/md'
 
 interface Props {}
 
 const SideBar = (props: Props) => {
   return (
     <nav className="block py-4 px-6 top-0 bottom-0 w-64 bg-white shadow-xl left-0 absolute flex-row flex-nowrap md:z-10 z-9999 transition-all duration-300 ease-in-out transform md:translate-x-0 -translate-x-full">
-
-    <button className="md:hidden flex items-center justify-center cursor-pointer text-blueGray-700 w-6 h-10 border-l-0 border-r border-t border-b border-solid border-blueGray-100 text-xl leading-none bg-white rounded-r border border-solid border-transparent absolute top-1/2 -right-24-px focus:outline-none z-9998">
-
-      <i className="fas fa-ellipsis-v"></i>
-
-    </button>
-
     <div className="flex-col min-h-full px-0 flex flex-wrap items-center justify-between w-full mx-auto overflow-y-auto overflow-x-hidden">
-
       <div className="flex bg-white flex-col items-stretch opacity-100 relative mt-4 overflow-y-auto overflow-x-hidden h-auto z-40 items-center flex-1 rounded w-full">
-
         <div className="md:flex-col md:min-w-full flex flex-col list-none">
-
-          <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-
-            Home
-
-          </h6>
-
+          <Link
+            to="company-profile"
+            className="flex md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+          >
+            <FaHome />
+            <h6 className="ml-3">Stock Profile</h6>
+          </Link>
+          <Link
+            to="income-statement"
+            className="flex md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+          >
+            <MdOutlineAccountBalance />
+            <h6 className="ml-3">Income Statement</h6>
+          </Link>
+          <Link
+            to="balance-sheet"
+            className="flex md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+          >
+            <FcMoneyTransfer />
+            <h6 className="ml-3">Balance Sheet</h6>
+          </Link>
+          <Link
+            to="cashflow-statement"
+            className="flex md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+          >
+            <FaMoneyBill />
+            <h6 className="ml-3">Cashflow Statement</h6>
+          </Link>
+          <Link
+            to="historical-dividend"
+            className="flex md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+          >
+            <SlGraph />
+            <h6 className="ml-3">Historical Dividend</h6>
+          </Link>
+          <Link
+            to="latest-news"
+            className="flex md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+          >
+            <FaRegNewspaper />
+            <h6 className="ml-3">Latest News</h6>
+          </Link>
         </div>
-
       </div>
-
     </div>
-
   </nav>
   )
 }
