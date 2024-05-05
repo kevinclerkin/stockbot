@@ -19,7 +19,7 @@ const Stock = (props: Props) => {
       setCompany(result?.data[0]);
     }
     getStockProfileInit();
-  }, [])
+  }, [ticker])
   return (
     <>
     { company ? (

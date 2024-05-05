@@ -1,12 +1,11 @@
-import React from 'react'
-import Table from '../../Components/Table/Table'
-
-interface Props {}
+interface Props {
+  
+}
 
 const DesignPage = (props: Props) => {
   return (
     <>
-    <Table />
+    
     </>
   )
 }
