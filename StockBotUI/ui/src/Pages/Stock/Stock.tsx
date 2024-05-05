@@ -5,6 +5,7 @@ import { getCompanyProfile } from '../../FinPrepAPI';
 import { AxiosResponse } from 'axios';
 import SideBar from '../../Components/SideBar/SideBar';
 import Dashboard from '../../Components/Dashboard/Dashboard';
+import Tile from '../../Components/Tile/Tile';
 
 interface Props {}
 
@@ -24,7 +25,9 @@ const Stock = (props: Props) => {
     { company ? (
     <div className="w-full relative flex ct-docs-disable-sidebar-content overflow-x-hidden">
       <SideBar />
-      <Dashboard />
+      <Dashboard>
+        <Tile title="Stock" details={company.companyName}></Tile>
+      </Dashboard>
 
   </div>
     ) : (

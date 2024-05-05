@@ -1,8 +1,11 @@
 import React from 'react'
 
-interface Props {}
+interface Props {
+    title: string
+    details: string
+}
 
-const Tile = (props: Props) => {
+const Tile = ({title, details}: Props) => {
   return (
     <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
 
@@ -16,11 +19,11 @@ const Tile = (props: Props) => {
 
                       <h5 className="text-blueGray-400 uppercase font-bold text-xs">
 
-                        Tile
+                        {title}
 
                       </h5>
 
-                      <span className="font-bold text-xl">350,897</span>
+                      <span className="font-bold text-xl">{details}</span>
 
                     </div>
 
