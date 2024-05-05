@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
             {path:"search", element:<SearchPage/>},
             {path:"stock/:ticker", 
             element:<Stock/>,
-        children:[{path:"stock-profile", element:<Stock/>},
+        children:[{path:"stock-profile", element:<StockProfile/>},
         {path:"income-statement", element:<IncomeStatement/>},
         {path:"balance-sheet", element:<BalanceSheet/>},
         {path:"cashflow-statement", element:<CashFlowStatement/>},
