@@ -25,7 +25,7 @@ const Stock = (props: Props) => {
     { company ? (
     <div className="w-full relative flex ct-docs-disable-sidebar-content overflow-x-hidden">
       <SideBar />
-      <Dashboard>
+      <Dashboard ticker={ticker!}>
         <Tile title="Stock" details={company.companyName}></Tile>
       </Dashboard>
 
