@@ -4,6 +4,7 @@ import { useOutlet, useOutletContext } from 'react-router-dom';
 import { getKeyMetrics } from '../../FinPrepAPI';
 import { AxiosResponse } from 'axios';
 import MetricsList from '../MetricsList/MetricsList';
+import Spinner from '../Spinner/Spinner';
 
 interface Props {}
 
@@ -51,7 +52,7 @@ const StockProfile = (props: Props) => {
           <MetricsList config={tableConfig} data={stock} />
         </>
       ) : (
-        <h1>No data found</h1>
+        <Spinner />
       )}
     </>
   )

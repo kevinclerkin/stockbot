@@ -4,6 +4,7 @@ import { useOutletContext } from 'react-router-dom';
 import { getIncomeStatement } from '../../FinPrepAPI';
 import { AxiosResponse } from 'axios';
 import Table from '../Table/Table';
+import Spinner from '../Spinner/Spinner';
 
 interface Props {}
 
@@ -78,7 +79,7 @@ const IncomeStatement = (props: Props) => {
       {incomeStatement ? (
         <Table config={tableConfig} data={incomeStatement} />
       ) : (
-        <>Loading...</>
+        <Spinner />
       )}
     </>
   )
