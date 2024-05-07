@@ -6,6 +6,7 @@ import { AxiosResponse } from 'axios';
 import SideBar from '../../Components/SideBar/SideBar';
 import Dashboard from '../../Components/Dashboard/Dashboard';
 import Tile from '../../Components/Tile/Tile';
+import Spinner from '../../Components/Spinner/Spinner';
 
 interface Props {}
 
@@ -35,7 +36,7 @@ const Stock = (props: Props) => {
 
   </div>
     ) : (
-      <div>Company or Security Not Found</div>
+      <Spinner />
 
     )}
     </>
