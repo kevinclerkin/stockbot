@@ -27,6 +27,10 @@ const Stock = (props: Props) => {
       <SideBar />
       <Dashboard ticker={ticker!}>
         <Tile title="Stock" details={company.companyName}></Tile>
+        <Tile title="Price" details={company.price.toString()}></Tile>
+        <p className="bg-white shadow rounded text-medium font-medium text-gray-900 p-3 mt-1 m-4">
+              {company.description}
+        </p>
       </Dashboard>
 
   </div>
