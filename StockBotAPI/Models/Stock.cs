@@ -15,5 +15,7 @@
         public string Industry { get; set; } = string.Empty;
 
         public long MarketCap { get; set; }
+
+        public List<Portfolio> Portfolio { get; set; } = new List<Portfolio>();
     }
 }
