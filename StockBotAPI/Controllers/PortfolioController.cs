@@ -15,12 +15,16 @@ namespace StockBotAPI.Controllers
         private readonly UserManager<AppUser> _userManager;
 
         private readonly IStockRepository _stockRepository;
-        public PortfolioController(UserManager<AppUser> userManager, IStockRepository stockRepository)
+
+        private readonly IPortfolioRepository _portfolioRepository;
+        public PortfolioController(UserManager<AppUser> userManager, IStockRepository stockRepository, IPortfolioRepository portfolioRepository)
         {
             _userManager = userManager;
 
             _stockRepository = stockRepository;
-            
+
+            _portfolioRepository = portfolioRepository;
+
         }
 
         [HttpGet]
@@ -29,8 +33,14 @@ namespace StockBotAPI.Controllers
         {
             var userName = User.GetUser();
             var appUser = await _userManager.FindByEmailAsync(userName);
+            var portfolio = await _portfolioRepository.GetUserPortfolio(appUser);
 
-            return Ok();
+            if(portfolio == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(portfolio);
 
         }
     }
