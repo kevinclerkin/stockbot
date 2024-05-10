@@ -8,5 +8,7 @@ namespace StockBotAPI.Interfaces
 
         Task<Portfolio> CreatePortfolioAsync(Portfolio portfolio);
 
+        Task<Portfolio> DeletePortfolio(AppUser user, string symbol);
+
     }
 }

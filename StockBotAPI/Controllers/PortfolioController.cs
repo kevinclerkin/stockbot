@@ -98,5 +98,30 @@ namespace StockBotAPI.Controllers
                 return StatusCode(200);
             }
         }
+
+        [HttpDelete]
+        [Authorize]
+
+        public async Task<IActionResult> DeletePortfolio(string symbol)
+        {
+            var userName = User.GetUser();
+            var appUser = await _userManager.FindByNameAsync(userName);
+
+            var portfolio = await _portfolioRepository.GetUserPortfolio(appUser!);
+
+            var stock = portfolio.Where(s => s.Symbol.ToLower() == symbol.ToLower()).ToList();
+
+            if(stock.Count() == 1)
+            {
+                await _portfolioRepository.DeletePortfolio(appUser!, symbol);
+            }
+
+            else
+            {
+                return BadRequest("This stock is not in the portfolio");
+            }
+
+            return Ok();
+        }
     }
 }

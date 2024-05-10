@@ -37,5 +37,21 @@ namespace StockBotAPI.Repositories
 
             return portfolio;
         }
+
+        public async Task<Portfolio> DeletePortfolio(AppUser user, string symbol)
+        {
+            var portfolio = await _context.Portfolios.FirstOrDefaultAsync
+            (u => u.AppUserId == user.Id && u.Stock.Symbol.ToLower() == symbol.ToLower());
+
+            if (portfolio == null)
+            {
+                return null!;
+            }
+
+            _context.Portfolios.Remove(portfolio);
+            await _context.SaveChangesAsync();
+
+            return portfolio;
+        }
     }
 }
