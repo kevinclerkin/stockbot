@@ -12,6 +12,9 @@ namespace StockBotAPI.Repositories
         {
             _context = context;
         }
+
+        
+
         public async Task<List<Stock>> GetUserPortfolio(AppUser user)
         {
             return await _context.Portfolios.Where(u => u.AppUserId == user.Id)
@@ -25,6 +28,19 @@ namespace StockBotAPI.Repositories
                     Industry = stock.Stock.Industry,
                     MarketCap = stock.Stock.MarketCap
                 }).ToListAsync();
+        }
+
+        public async Task<Portfolio> CreatePortfolio(Portfolio portfolio)
+        {
+            if(portfolio == null)
+            {
+                throw new ArgumentNullException();
+            };
+
+            var addPortfolio = _context.Portfolios.Add(portfolio);
+            await _context.SaveChanges();
+
+            return (portfolio);
         }
     }
 }

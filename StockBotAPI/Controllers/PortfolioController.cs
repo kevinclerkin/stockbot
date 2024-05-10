@@ -43,5 +43,13 @@ namespace StockBotAPI.Controllers
             return Ok(portfolio);
 
         }
+
+        [HttpPost]
+        [Authorize]
+
+        public async Task<IActionResult> CreatePortfolio(string symbol)
+        {
+            return Ok();
+        }
     }
 }

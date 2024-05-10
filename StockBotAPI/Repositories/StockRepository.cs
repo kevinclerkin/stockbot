@@ -25,5 +25,10 @@ namespace StockBotAPI.Repositories
 
            
         }
+
+        public async Task<Stock?> GetBySymbolAsync(string symbol)
+        {
+            return await _context.Stocks.FirstOrDefaultAsync(i => i.Symbol == symbol);
+        }
     }
 }
