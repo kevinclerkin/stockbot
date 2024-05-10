@@ -12,6 +12,14 @@ namespace StockBotAPI.Repositories
         {
             _context = context;
         }
+
+        public async Task<Stock> CreateStockAsync(Stock stock)
+        {
+            await _context.Stocks.AddAsync(stock);
+            await _context.SaveChangesAsync();
+            return stock;
+        }
+
         public async Task<List<Stock>> GetAsync()
         {
             return await _context.Stocks.ToListAsync();
@@ -30,5 +38,6 @@ namespace StockBotAPI.Repositories
         {
             return await _context.Stocks.FirstOrDefaultAsync(i => i.Symbol == symbol);
         }
+
     }
 }

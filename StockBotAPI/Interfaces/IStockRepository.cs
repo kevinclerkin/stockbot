@@ -9,5 +9,7 @@ namespace StockBotAPI.Interfaces
         Task<Stock?> GetByIdAsync(int id);
 
         Task<Stock?> GetBySymbolAsync(string symbol);
+
+        Task<Stock> CreateStockAsync(Stock stock);
     }
 }

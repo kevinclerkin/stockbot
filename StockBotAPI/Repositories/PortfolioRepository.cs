@@ -30,17 +30,12 @@ namespace StockBotAPI.Repositories
                 }).ToListAsync();
         }
 
-        public async Task<Portfolio> CreatePortfolio(Portfolio portfolio)
+        public async Task<Portfolio> CreatePortfolioAsync(Portfolio portfolio)
         {
-            if(portfolio == null)
-            {
-                throw new ArgumentNullException();
-            };
+            await _context.Portfolios.AddAsync(portfolio);
+            await _context.SaveChangesAsync();
 
-            var addPortfolio = _context.Portfolios.Add(portfolio);
-            await _context.SaveChanges();
-
-            return (portfolio);
+            return portfolio;
         }
     }
 }

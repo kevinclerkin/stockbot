@@ -6,6 +6,7 @@ namespace StockBotAPI.Interfaces
     {
         Task<List<Stock>> GetUserPortfolio(AppUser user);
 
-        Task<Portfolio> CreatePortfolio(Portfolio portfolio);
+        Task<Portfolio> CreatePortfolioAsync(Portfolio portfolio);
+
     }
 }
