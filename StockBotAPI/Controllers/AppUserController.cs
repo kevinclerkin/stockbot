@@ -70,12 +70,12 @@ namespace StockBotAPI.Controllers
                 }
                 else
                 {
-                    return StatusCode(500, registeredUser);
+                    return StatusCode(500, registeredUser.Errors);
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, 0);
+                return StatusCode(500, ex.Message);
 
             }
         }
