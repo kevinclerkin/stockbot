@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StockBotAPI.Data;
+using StockBotAPI.DTO;
 using StockBotAPI.Interfaces;
+using StockBotAPI.Mappers;
 
 namespace StockBotAPI.Controllers
 {
@@ -43,6 +45,19 @@ namespace StockBotAPI.Controllers
 
             return Ok(stock);
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateStockDTO stockDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var stockModel = stockDto.ToStockFromCreateDTO();
+
+            await _stockRepo.CreateStockAsync(stockModel);
+
+            return CreatedAtAction(nameof(GetById), new { id = stockModel.Id }, stockModel.ToStockDTO());
         }
     }
 }
