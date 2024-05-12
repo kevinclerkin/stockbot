@@ -11,18 +11,16 @@ namespace StockBotAPI.Extensions
             {
                 throw new ArgumentNullException(nameof(user));
             }
+            
             else
             {
-                var claim = user.Claims.SingleOrDefault(x => x.Type.Equals("given_name"));
-                if (claim != null)
-                {
-                    return claim.Value;
-                }
-                else
-                {
-                    throw new InvalidOperationException("Given name claim not found.");
-                }
+               return user.Claims.SingleOrDefault(x => x.Type.Equals("name"))!.Value;
+                
+           
             }
         }
     }
 }
+
+
+

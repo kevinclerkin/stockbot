@@ -23,7 +23,7 @@ namespace StockBotAPI.Services
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Email, appUser.Email),
-                new Claim(JwtRegisteredClaimNames.GivenName, appUser.UserName)
+                new Claim(JwtRegisteredClaimNames.Name, appUser.UserName)
             };
 
             var encrypt = new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha512Signature);
