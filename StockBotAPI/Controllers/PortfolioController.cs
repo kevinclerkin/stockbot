@@ -31,13 +31,8 @@ namespace StockBotAPI.Controllers
         public async Task<IActionResult> GetPortfolio()
         {
             var userName = User.GetUser();
-            var appUser = await _userManager.FindByEmailAsync(userName);
-            var portfolio = await _portfolioRepository.GetUserPortfolio(appUser!);
-
-            if(portfolio == null)
-            {
-                return NotFound();
-            }
+            var appUser = await _userManager.FindByNameAsync(userName);
+            var portfolio = await _portfolioRepository.GetUserPortfolio(appUser);
 
             return Ok(portfolio);
 
