@@ -1,6 +1,4 @@
-﻿using Azure.Identity;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StockBotAPI.DTO;
@@ -23,6 +21,8 @@ namespace StockBotAPI.Controllers
             _userManager = userManager;
 
             _tokenService = tokenService;
+
+            _signInManager = signInManager;
         }
 
         [HttpPost("register")]
@@ -43,7 +43,7 @@ namespace StockBotAPI.Controllers
                     Email = register.Email,
                 };
 
-                var registeredUser = await _userManager.CreateAsync(appUser, register.Password);
+                var registeredUser = await _userManager.CreateAsync(appUser, register.Password!);
 
                 if (registeredUser.Succeeded)
                 {
@@ -87,14 +87,14 @@ namespace StockBotAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var loggedUser = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName ==  loginDTO.UserName.ToLower());
+            var loggedUser = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName ==  loginDTO.UserName!.ToLower());
 
             if(loggedUser == null)
             {
                 return Unauthorized();
             }
 
-            var userSignIn = await _signInManager.CheckPasswordSignInAsync(loggedUser, loginDTO.Password, false);
+            var userSignIn = await _signInManager.CheckPasswordSignInAsync(loggedUser, loginDTO.Password!, false);
 
             if (!userSignIn.Succeeded)
             {
