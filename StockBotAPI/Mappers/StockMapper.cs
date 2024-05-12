@@ -27,5 +27,18 @@ namespace StockBotAPI.Mappers
             };
 
         }
+
+        public static Stock ToStockFromCreateDTO(this CreateStockDTO stockDTO)
+        {
+            return new Stock
+            {
+                Symbol = stockDTO.Symbol,
+                CompanyName = stockDTO.CompanyName,
+                Purchase = stockDTO.Purchase,
+                LastDiv = stockDTO.LastDiv,
+                Industry = stockDTO.Industry,
+                MarketCap = stockDTO.MarketCap
+            };
+        }
     }
 }
