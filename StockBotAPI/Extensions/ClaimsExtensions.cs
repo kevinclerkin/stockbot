@@ -7,7 +7,22 @@ namespace StockBotAPI.Extensions
     {
         public static string GetUser(this ClaimsPrincipal user)
         {
-            return user.Claims.SingleOrDefault(x => x.Type.Equals("https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims"))!.Value;
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            else
+            {
+                var claim = user.Claims.SingleOrDefault(x => x.Type.Equals("given_name"));
+                if (claim != null)
+                {
+                    return claim.Value;
+                }
+                else
+                {
+                    throw new InvalidOperationException("Given name claim not found.");
+                }
+            }
         }
     }
 }
