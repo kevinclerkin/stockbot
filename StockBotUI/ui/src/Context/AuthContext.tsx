@@ -1,4 +1,5 @@
 import React, { createContext } from "react";
+import { UserProfile } from "../Models/User";
 
 
 type UserContextType = {
