@@ -1,7 +1,7 @@
 import React, { createContext, useEffect } from "react";
 import { UserProfile } from "../Models/User";
 import { useNavigate } from "react-router-dom";
-import { toRegisterAPI } from "../Services/AuthService";
+import { toLoginAPI, toRegisterAPI } from "../Services/AuthService";
 import { UserToken } from "../Models/User";
 
 type UserContextType = {
@@ -53,5 +53,23 @@ export const UserProvider = ({children}: Props) => {
         });
     
     }
+
+    const loginUser = async (username: string, password: string) => {
+        await toLoginAPI(username, password)
+          .then((res) => {
+            if (res) {
+              localStorage.setItem("token", res?.token);
+              const userObj = {
+                username: res?.username,
+                email: res?.email,
+              };
+              localStorage.setItem("user", JSON.stringify(userObj));
+              setToken(res?.token!);
+              setUser(userObj!);
+              navigate("/search");
+            }
+          })
+          .catch((e) => ("Server error occured"));
+      };
 
 }
