@@ -38,7 +38,7 @@ export const UserProvider = ({children}: Props) => {
 
     const register = async (username: string, email: string, password: string) => {
         await toRegisterAPI(username, email, password)
-        .then((res) => {
+          .then((res) => {
             if(res){
                 localStorage.setItem("token", res.token!);
                 const userObj ={
@@ -48,11 +48,13 @@ export const UserProvider = ({children}: Props) => {
                 localStorage.setItem("user", JSON.stringify(userObj));
                 setToken(res?.token!);
                 setUser(userObj!);
+                navigate("/search");
             }
         
-        });
+        })
+          .catch((e) => ("Server error occured"));
     
-    }
+    };
 
     const loginUser = async (username: string, password: string) => {
         await toLoginAPI(username, password)
@@ -70,6 +72,20 @@ export const UserProvider = ({children}: Props) => {
             }
           })
           .catch((e) => ("Server error occured"));
-      };
+    };
+
+    const isLoggedIn = () => {
+        return !!user;
+    };
+
+    const logout = () => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        setUser(null);
+        setToken("");
+        navigate("/");
+    };
+
+   
 
 }
