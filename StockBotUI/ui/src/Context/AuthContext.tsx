@@ -2,7 +2,6 @@ import React, { createContext, useEffect } from "react";
 import { UserProfile } from "../Models/User";
 import { useNavigate } from "react-router-dom";
 import { toLoginAPI, toRegisterAPI } from "../Services/AuthService";
-import { UserToken } from "../Models/User";
 
 type UserContextType = {
     user: UserProfile | null;
@@ -36,7 +35,7 @@ export const UserProvider = ({children}: Props) => {
         setIsReady(true);
     },[]);
 
-    const register = async (username: string, email: string, password: string) => {
+    const registerUser = async (username: string, email: string, password: string) => {
         await toRegisterAPI(username, email, password)
           .then((res) => {
             if(res){
@@ -78,7 +77,7 @@ export const UserProvider = ({children}: Props) => {
         return !!user;
     };
 
-    const logout = () => {
+    const logoutUser = () => {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
         setUser(null);
@@ -86,6 +85,12 @@ export const UserProvider = ({children}: Props) => {
         navigate("/");
     };
 
-   
+    return (
+        <UserContext.Provider value={{user, token, registerUser, loginUser, logoutUser, isLoggedIn}}>
+            {isReady ? children : null}
+        </UserContext.Provider>
+    );
 
 }
+
+export const authContext = () => React.useContext(UserContext);
