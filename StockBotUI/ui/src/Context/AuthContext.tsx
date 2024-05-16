@@ -2,6 +2,7 @@ import React, { createContext, useEffect } from "react";
 import { UserProfile } from "../Models/User";
 import { useNavigate } from "react-router-dom";
 import { toLoginAPI, toRegisterAPI } from "../Services/AuthService";
+import axios from "axios";
 
 type UserContextType = {
     user: UserProfile | null;
@@ -31,6 +32,7 @@ export const UserProvider = ({children}: Props) => {
         if(user && token){
             setUser(JSON.parse(user));
             setToken(token);
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         }
         setIsReady(true);
     },[]);
