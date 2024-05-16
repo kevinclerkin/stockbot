@@ -89,6 +89,15 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddCors(options => options.AddPolicy(name:"StockBotPolicy",
+  policy =>
+  {
+      policy.WithOrigins("http://localhost:3000")
+      .AllowAnyMethod()
+      .AllowAnyHeader()
+      .AllowCredentials();
+  }));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -100,13 +109,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(x => x
-   .AllowAnyHeader()
-   .AllowAnyMethod()
-   .AllowCredentials()
-   .WithOrigins("https://localhost:3000")
-
-);
+app.UseCors("StockBotPolicy");
 
 app.UseAuthentication();
 
