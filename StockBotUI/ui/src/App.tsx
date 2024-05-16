@@ -6,12 +6,12 @@ import { UserProvider } from './Context/AuthContext';
 function App() {
   
   return (
-    <div className="App">
+    <>
       <UserProvider>
       <NavBar />
       <Outlet />
       </UserProvider>
-    </div>
+    </>
   );
 }
 
