@@ -11,6 +11,7 @@ import HistoricalDiv from "../Components/HistoricalDiv/HistoricalDiv";
 import LatestNews from "../Components/LatestNews/LatestNews";
 import DesignPage from "../Pages/DesignPage/DesignPage";
 import LoginPage from "../Pages/LoginPage/LoginPage";
+import RegisterPage from "../Pages/RegisterPage/RegisterPage";
 
 export const router = createBrowserRouter([
     {
@@ -18,6 +19,7 @@ export const router = createBrowserRouter([
         element: <App />,
         children:[
             {path:"", element:<Home/>},
+            {path:"register", element:<RegisterPage/>},
             {path:"login", element:<LoginPage/>},
             {path:"search", element:<SearchPage/>},
             {path: "design", element:<DesignPage/>},
