@@ -12,6 +12,7 @@ import LatestNews from "../Components/LatestNews/LatestNews";
 import DesignPage from "../Pages/DesignPage/DesignPage";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegisterPage from "../Pages/RegisterPage/RegisterPage";
+import Protected from "./Protected";
 
 export const router = createBrowserRouter([
     {
@@ -21,10 +22,10 @@ export const router = createBrowserRouter([
             {path:"", element:<Home/>},
             {path:"register", element:<RegisterPage/>},
             {path:"login", element:<LoginPage/>},
-            {path:"search", element:<SearchPage/>},
+            {path:"search", element:<Protected><SearchPage/></Protected>},
             {path: "design", element:<DesignPage/>},
             {path:"stock/:ticker", 
-            element:<Stock/>,
+            element:<Protected><Stock/></Protected>,
         children:[{path:"stock-profile", element:<StockProfile/>},
         {path:"income-statement", element:<IncomeStatement/>},
         {path:"balance-sheet", element:<BalanceSheet/>},
