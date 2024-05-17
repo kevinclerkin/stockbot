@@ -1,7 +1,7 @@
 import axios from "axios"
 import { GetPortfolio, PostPortfolio } from "../Models/Portfolio"
 
-const API = "https://localhost:7297/api"
+const API = "https://localhost:7297/api/portfolio"
 
 
 export const GetPortfolioFromAPI = async () => {
@@ -17,7 +17,7 @@ export const GetPortfolioFromAPI = async () => {
 
 export const AddPortfolioFromAPI = async (symbol: string) => {
     try {
-        const data = await axios.post<PostPortfolio>(`${API}/portfolio/?symbol=${ symbol }`)
+        const data = await axios.post<PostPortfolio>(API + `?symbol=${symbol}`)
         return data
     }
     catch(error) {
@@ -28,7 +28,7 @@ export const AddPortfolioFromAPI = async (symbol: string) => {
 
 export const DeletePortfolioFromAPI = async (symbol: string) => {
     try {
-        const data = await axios.delete<PostPortfolio>(`${API}/portfolio/?symbol=${ symbol }`)
+        const data = await axios.delete<PostPortfolio>(API + `?symbol=${symbol}`)
         return data
     }
     catch(error) {
