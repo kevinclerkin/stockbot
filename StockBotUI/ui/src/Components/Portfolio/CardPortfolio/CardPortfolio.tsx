@@ -1,9 +1,10 @@
 import React, { SyntheticEvent } from 'react'
 import RemovePortfolio from '../RemovePortfolio/RemovePortfolio';
 import { Link } from 'react-router-dom';
+import { GetPortfolio } from '../../../Models/Portfolio';
 
 interface Props {
-    portfolioItem: string;
+    portfolioItem: GetPortfolio;
     onPortfolioRemove: (e: SyntheticEvent) => void;
    
 }
@@ -11,9 +12,9 @@ interface Props {
 const CardPortfolio = ({portfolioItem, onPortfolioRemove}: Props) => {
   return (
     <div className="flex flex-col w-full p-8 space-y-4 text-center rounded-lg shadow-lg md:w-1/3">
-    <Link to={`/stock/${portfolioItem}`} className="pt-6 text-xl font-bold">{portfolioItem}</Link>
+    <Link to={`/stock/${portfolioItem}`} className="pt-6 text-xl font-bold">{portfolioItem.symbol}</Link>
     <RemovePortfolio
-      portfolioItem={portfolioItem}
+      portfolioItem={portfolioItem.symbol}
       onPortfolioRemove={onPortfolioRemove}
     />
   </div>

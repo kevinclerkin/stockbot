@@ -1,8 +1,9 @@
 import React, { SyntheticEvent } from 'react'
 import CardPortfolio from '../CardPortfolio/CardPortfolio';
+import { GetPortfolio } from '../../../Models/Portfolio';
 
 interface Props {
-    portfolio: string[];
+    portfolio: GetPortfolio[];
     onPortfolioRemove: (e: SyntheticEvent) => void;
     
 }
