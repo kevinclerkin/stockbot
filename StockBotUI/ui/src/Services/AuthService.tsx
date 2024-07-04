@@ -19,13 +19,13 @@ export const toLoginAPI = async (username: string, password: string) =>{
         }
 }
 
-export const toRegisterAPI = async (username: string, email: string, password: string) =>{
+export const toRegisterAPI = async (username: string, password: string, email:string) =>{
     try{
 
         const response = await axios.post<UserToken>(API + "/user/register",{
-                username: username,
-                email: email,
-                password: password
+            email: email,
+            username: username,
+            password: password
         })
         return response.data
 
