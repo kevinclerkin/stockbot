@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using StockBotAPI.DTO;
+﻿using StockBotAPI.DTO;
 using StockBotAPI.Interfaces;
 using System.Text.Json;
+
 
 namespace StockBotAPI.Services
 {
@@ -21,24 +21,31 @@ namespace StockBotAPI.Services
         {
             try
             {
-                var result = await _httpClient.GetAsync($"https://financialmodelingprep.com/api/v3/profile/{symbol}?apikey={_configuration["FMPKey"]}");
+                var apiKey = _configuration["FMPKey"];
+                if (string.IsNullOrEmpty(apiKey))
+                {
+                    throw new InvalidOperationException("API key for Financial Modeling Prep is missing.");
+                }
+
+                var requestUrl = $"https://financialmodelingprep.com/api/v3/profile/{symbol}?apikey={apiKey}";
+                var result = await _httpClient.GetAsync(requestUrl);
+
                 if (result.IsSuccessStatusCode)
                 {
                     var content = await result.Content.ReadAsStringAsync();
-                    var tasks = JsonSerializer.Deserialize<FinPrepDTO[]>(content)!;
-                    var stock = tasks[0];
-                    if (stock != null)
-                    {
-                        
-                    }
-                    return null!;
+                    var stocks = JsonSerializer.Deserialize<FinPrepDTO[]>(content);
+                    return stocks?.FirstOrDefault();
                 }
-                return null!;
+                else
+                {
+                    Console.WriteLine($"Error: {result.StatusCode}");
+                    return null;
+                }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                return null!;
+                Console.WriteLine($"Exception: {e.Message}");
+                return null;
             }
         }
         
