@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StockBotAPI.DTO;
+using StockBotAPI.Interfaces;
 using System.Text.Json;
 
 namespace StockBotAPI.Services
 {
-    public class FinPrepService
+    public class FinPrepService : IFinPrepService
     {
         private readonly HttpClient _httpClient;
 
@@ -16,7 +17,7 @@ namespace StockBotAPI.Services
             _configuration = configuration;
         }
 
-        public async Task<IActionResult> GetStockBySymbol(string symbol)
+        public async Task<FinPrepDTO> GetStockBySymbol(string symbol)
         {
             try
             {
