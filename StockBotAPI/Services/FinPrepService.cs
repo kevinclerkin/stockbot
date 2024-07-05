@@ -115,5 +115,38 @@ namespace StockBotAPI.Services
                 return null;
             }
         }
+
+        public async Task<string> GetIncomeStatement(string symbol)
+        {
+            try
+            {
+                var apiKey = _configuration["FMPKey"];
+                if (string.IsNullOrEmpty(apiKey))
+                {
+                    throw new InvalidOperationException("API key for Financial Modeling Prep is missing.");
+                }
+
+                var requestUrl = $"https://financialmodelingprep.com/api/v3/income-statement/{symbol}?limit=40&apikey={apiKey}";
+                var response = await _httpClient.GetAsync(requestUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    return content;
+
+                }
+                else
+                {
+                    Console.WriteLine($"Error: {response.StatusCode}");
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception: {e.Message}");
+                return null;
+            }
+
+        }
     }
 }

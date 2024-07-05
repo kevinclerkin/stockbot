@@ -9,5 +9,7 @@ namespace StockBotAPI.Interfaces
         Task<FinPrepDTO> GetStockProfile(string symbol);
 
         Task<string> GetKeyMetrics(string symbol);
+
+        Task<string> GetIncomeStatement(string symbol);
     }
 }
