@@ -18,6 +18,8 @@ namespace StockBotAPI.Services
             _configuration = configuration;
         }
 
+       
+
         public async Task<string> GetStockBySymbol(string symbol)
         {
             try
@@ -72,6 +74,38 @@ namespace StockBotAPI.Services
                 else
                 {
                     Console.WriteLine($"Error: {result.StatusCode}");
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception: {e.Message}");
+                return null;
+            }
+        }
+
+        public async Task<string> GetKeyMetrics(string symbol)
+        {
+            try
+            {
+                var apiKey = _configuration["FMPKey"];
+                if (string.IsNullOrEmpty(apiKey))
+                {
+                    throw new InvalidOperationException("API key for Financial Modeling Prep is missing.");
+                }
+
+                var requestUrl = $"https://financialmodelingprep.com/api/v3/key-metrics-ttm/{symbol}?apikey={apiKey}";
+                var response = await _httpClient.GetAsync(requestUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    return content;
+
+                }
+                else
+                {
+                    Console.WriteLine($"Error: {response.StatusCode}");
                     return null;
                 }
             }
