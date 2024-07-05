@@ -1,11 +1,11 @@
 import React, { SyntheticEvent } from 'react'
 import { Company } from '../../company';
-import { searchCompany } from '../../FinPrepAPI';
 import PortfolioList from '../../Components/Portfolio/PortfolioList/PortfolioList';
 import CardList from '../../Components/CardList/CardList';
 import Search from '../../Components/Search/Search';
 import { GetPortfolio } from '../../Models/Portfolio';
 import { AddPortfolioFromAPI, DeletePortfolioFromAPI, GetPortfolioFromAPI } from '../../Services/PortfolioService';
+import { getStockData } from '../../Services/StockDataService';
 
 interface Props {}
 
@@ -36,7 +36,7 @@ const getPortfolio = async () => {
 
 const onSearchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    const result = await searchCompany(search);
+    const result = await getStockData(search);
     if(typeof result === 'string') {
         setServerError(result);
     } else if (Array.isArray(result.data)) {
