@@ -4,6 +4,6 @@ namespace StockBotAPI.Interfaces
 {
     public interface IFinPrepService
     {
-        Task<FinPrepDTO> GetStockBySymbol(string symbol);
+        Task<string> GetStockBySymbol(string symbol);
     }
 }
