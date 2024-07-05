@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { CompanyKeyMetrics } from '../../company';
 import { useOutletContext } from 'react-router-dom';
-import { getKeyMetrics } from '../../FinPrepAPI';
+import { getKeyMetrics } from '../../Services/StockDataService';
 import { AxiosResponse } from 'axios';
 import MetricsList from '../MetricsList/MetricsList';
 import Spinner from '../Spinner/Spinner';
@@ -84,7 +84,7 @@ const StockProfile = (props: Props) => {
   useEffect(() => {
     const getStockKeyMetrics = async () => {
       const result = await getKeyMetrics(ticker!) as AxiosResponse<CompanyKeyMetrics[], any>;
-      setStock(result?.data[0]);
+      setStock(result.data[0]);
     };
     getStockKeyMetrics();
   }, [ticker])

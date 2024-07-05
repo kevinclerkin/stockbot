@@ -1,4 +1,6 @@
-import axios, { AxiosResponse } from "axios";
+
+export {}
+/*import axios, { AxiosResponse } from "axios";
 import { Company, CompanyIncomeStatement, CompanyKeyMetrics, CompanyProfile } from "./company";
 
 interface searchResponse {
@@ -71,4 +73,4 @@ export const getIncomeStatement = async (query: string)  => {
             return error as string;
         }
     }
-}
+}*/

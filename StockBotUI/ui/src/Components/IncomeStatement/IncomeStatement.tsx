@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { CompanyIncomeStatement } from '../../company';
 import { useOutletContext } from 'react-router-dom';
-import { getIncomeStatement } from '../../FinPrepAPI';
-import { AxiosResponse } from 'axios';
+import { getIncomeStatement } from '../../Services/StockDataService';
 import Table from '../Table/Table';
 import Spinner from '../Spinner/Spinner';
 import { formatLargeMonetaryNumber, formatRatio } from '../Helpers/NumberFormatting';
+import { AxiosResponse } from 'axios';
 
 interface Props {}
 

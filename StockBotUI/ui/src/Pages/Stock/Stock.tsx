@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { CompanyProfile } from '../../company';
-import { getCompanyProfile } from '../../FinPrepAPI';
+import { getCompanyProfile } from '../../Services/StockDataService';
 import { AxiosResponse } from 'axios';
 import SideBar from '../../Components/SideBar/SideBar';
 import Dashboard from '../../Components/Dashboard/Dashboard';
