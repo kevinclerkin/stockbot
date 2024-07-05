@@ -50,5 +50,17 @@ namespace StockBotAPI.Controllers
 
             return Ok(metrics);
         }
+
+        [HttpGet("income/{query}")]
+        public async Task<IActionResult> CompanyIncome(string query)
+        {
+            var income = await _finPrepService.GetIncomeStatement(query);
+            if (income == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(income);
+        }
     }
 }
