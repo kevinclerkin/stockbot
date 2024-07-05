@@ -1,4 +1,5 @@
 ﻿using StockBotAPI.DTO;
+using StockBotAPI.Models;
 
 namespace StockBotAPI.Interfaces
 {
@@ -6,7 +7,7 @@ namespace StockBotAPI.Interfaces
     {
         Task<string> GetStockBySymbol(string symbol);
 
-        Task<FinPrepDTO> GetStockProfile(string symbol);
+        Task<Stock> GetStockProfile(string symbol);
 
         Task<string> GetKeyMetrics(string symbol);
 

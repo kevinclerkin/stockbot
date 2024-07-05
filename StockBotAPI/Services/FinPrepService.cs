@@ -1,5 +1,7 @@
 ﻿using StockBotAPI.DTO;
 using StockBotAPI.Interfaces;
+using StockBotAPI.Mappers;
+using StockBotAPI.Models;
 using System.Text.Json;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -52,7 +54,7 @@ namespace StockBotAPI.Services
             }
         }
 
-        public async Task<FinPrepDTO> GetStockProfile(string symbol)
+        public async Task<Stock> GetStockProfile(string symbol)
         {
             try
             {
@@ -68,8 +70,14 @@ namespace StockBotAPI.Services
                 if (result.IsSuccessStatusCode)
                 {
                     var content = await result.Content.ReadAsStringAsync();
-                    var stocks = JsonSerializer.Deserialize<FinPrepDTO[]>(content);
-                    return stocks?.FirstOrDefault();
+                    var profiles = JsonSerializer.Deserialize<FinPrepDTO[]>(content);
+                    var profile = profiles?.FirstOrDefault();
+                    if (profile != null)
+                    {
+                        return profile.ToStockFromFinPrep();
+                    }
+                    return null;
+
                 }
                 else
                 {

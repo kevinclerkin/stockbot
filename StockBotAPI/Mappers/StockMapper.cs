@@ -40,5 +40,18 @@ namespace StockBotAPI.Mappers
                 MarketCap = stockDTO.MarketCap
             };
         }
+
+        public static Stock ToStockFromFinPrep(this FinPrepDTO finPrepStock)
+        {
+            return new Stock
+            {
+                Symbol = finPrepStock.symbol,
+                CompanyName = finPrepStock.companyName,
+                Purchase = (decimal)finPrepStock.price,
+                LastDiv = (decimal)finPrepStock.lastDiv,
+                Industry = finPrepStock.industry,
+                MarketCap = finPrepStock.mktCap
+            };
+        }
     }
 }

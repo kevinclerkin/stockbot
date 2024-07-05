@@ -16,14 +16,17 @@ namespace StockBotAPI.Controllers
         private readonly IStockRepository _stockRepository;
 
         private readonly IPortfolioRepository _portfolioRepository;
-        public PortfolioController(UserManager<AppUser> userManager, IStockRepository stockRepository, IPortfolioRepository portfolioRepository)
+
+        private readonly IFinPrepService _finPrepService;
+        public PortfolioController(UserManager<AppUser> userManager, IStockRepository stockRepository, IPortfolioRepository portfolioRepository, IFinPrepService finPrepService)
         {
             _userManager = userManager;
 
             _stockRepository = stockRepository;
 
             _portfolioRepository = portfolioRepository;
-
+            
+            _finPrepService = finPrepService;
         }
 
         [HttpGet]
@@ -49,7 +52,7 @@ namespace StockBotAPI.Controllers
 
             if (stock == null)
             {
-
+                stock = await _finPrepService.GetStockProfile(symbol);
                 if (stock == null)
                 {
                     return BadRequest("Stock does not exist");
@@ -60,12 +63,8 @@ namespace StockBotAPI.Controllers
                 }
             }
 
-            if (stock == null)
-            {
+            if (stock == null) return BadRequest("Stock not found");
 
-                return BadRequest("Stock not found");
-
-            }
 
             var portfolio = await _portfolioRepository.GetUserPortfolio(appUser!);
 
