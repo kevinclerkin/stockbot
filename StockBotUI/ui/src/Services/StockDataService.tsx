@@ -24,7 +24,7 @@ export const getStockData = async (query: string): Promise<string | AxiosRespons
 
 export const getCompanyProfile = async (query: string)  => {
     try{
-        const data = await axios.get<CompanyProfile[]>(`https://localhost:7297/api/profile/${query}`);
+        const data = await axios.get<CompanyProfile>(`https://localhost:7297/api/stock-data/overview/${query}`);
         return data;
     }
     catch (error: any) {
@@ -41,7 +41,7 @@ export const getCompanyProfile = async (query: string)  => {
 
 export const getKeyMetrics = async (query: string)  => {
     try{
-        const data = await axios.get<CompanyKeyMetrics[]>(`https://localhost:7297/api/key-metrics/${query}`);
+        const data = await axios.get<CompanyKeyMetrics[]>(`https://localhost:7297/api/stock-data/key-metrics/${query}`);
         return data;
     }
     catch (error: any) {
@@ -58,7 +58,7 @@ export const getKeyMetrics = async (query: string)  => {
 
 export const getIncomeStatement = async (query: string)  => {
     try{
-        const data = await axios.get<CompanyIncomeStatement[]>(`https://localhost:7297/api/income/${query}`);
+        const data = await axios.get<CompanyIncomeStatement[]>(`https://localhost:7297/api/stock-data/income/${query}`);
         return data;
     }
     catch (error: any) {

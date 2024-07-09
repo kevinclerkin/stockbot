@@ -12,5 +12,7 @@ namespace StockBotAPI.Interfaces
         Task<string> GetKeyMetrics(string symbol);
 
         Task<string> GetIncomeStatement(string symbol);
+
+        Task<FinPrepDTO> GetCompanyOverview(string symbol);
     }
 }

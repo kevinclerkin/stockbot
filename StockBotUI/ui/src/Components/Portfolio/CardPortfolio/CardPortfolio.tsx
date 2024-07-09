@@ -12,7 +12,7 @@ interface Props {
 const CardPortfolio = ({portfolioItem, onPortfolioRemove}: Props) => {
   return (
     <div className="flex flex-col w-full p-8 space-y-4 text-center rounded-lg shadow-lg md:w-1/3">
-    <Link to={`/stock/${portfolioItem}`} className="pt-6 text-xl font-bold">{portfolioItem.symbol}</Link>
+    <Link to={`/stock/${portfolioItem.symbol}/stock-profile`} className="pt-6 text-xl font-bold">{portfolioItem.symbol}</Link>
     <RemovePortfolio
       portfolioItem={portfolioItem.symbol}
       onPortfolioRemove={onPortfolioRemove}

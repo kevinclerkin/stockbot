@@ -39,6 +39,18 @@ namespace StockBotAPI.Controllers
             return Ok(profiles);
         }
 
+        [HttpGet("overview/{query}")]
+        public async Task<IActionResult> CompanyOverview(string query)
+        {
+            var profile = await _finPrepService.GetCompanyOverview(query);
+            if (profile == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(profile);
+        }
+
         [HttpGet("key-metrics/{query}")]
         public async Task<IActionResult> CompanyMetrics(string query)
         {
