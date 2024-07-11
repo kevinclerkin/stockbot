@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockBotAPI", "StockBotAPI\StockBotAPI.csproj", "{6AEE2BB9-D861-4BBA-B574-1F715459B0DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockBotTests", "StockBotTests\StockBotTests.csproj", "{09ADA905-7CC1-4AA2-BB30-D25A25398EF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6AEE2BB9-D861-4BBA-B574-1F715459B0DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AEE2BB9-D861-4BBA-B574-1F715459B0DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AEE2BB9-D861-4BBA-B574-1F715459B0DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09ADA905-7CC1-4AA2-BB30-D25A25398EF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09ADA905-7CC1-4AA2-BB30-D25A25398EF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09ADA905-7CC1-4AA2-BB30-D25A25398EF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09ADA905-7CC1-4AA2-BB30-D25A25398EF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
