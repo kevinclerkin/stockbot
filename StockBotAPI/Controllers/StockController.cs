@@ -11,12 +11,10 @@ namespace StockBotAPI.Controllers
     [ApiController]
     public class StockController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-
         private readonly IStockRepository _stockRepo;
-        public StockController(ApplicationDbContext context, IStockRepository stockRepo)
+        public StockController(IStockRepository stockRepo)
         {
-            _context = context;
+           
 
             _stockRepo = stockRepo;
             
@@ -24,7 +22,7 @@ namespace StockBotAPI.Controllers
 
         [HttpGet]
 
-        public async Task<IActionResult> GetAsync()
+        public async Task<IActionResult> GetStockAsync()
         {
             var stockList = await _stockRepo.GetAsync();
             
