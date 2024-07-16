@@ -3,6 +3,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using StockBotAPI.Controllers;
 using StockBotAPI.Interfaces;
+using StockBotAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,20 @@ namespace StockBotTests
 
             
 
+        }
+
+        [Fact]
+        public async void StockData_GetCompanyProfile_ReturnsTypeOfStock()
+        {
+            //Arrange
+            string symbol = "TSLA";
+
+            //Act
+            var result = await _stockDataController.CompanyProfile(symbol);
+
+            //Assert
+            result.Should().BeOfType<OkObjectResult>();
+            (result as OkObjectResult)!.Value.Should().BeAssignableTo<Stock>();
         }
     }
 }
