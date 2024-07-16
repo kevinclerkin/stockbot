@@ -86,6 +86,20 @@ namespace StockBotTests
             (result as OkObjectResult)!.Value.Should().BeAssignableTo<string>();
         }
 
+        [Fact]
+        public async void StockData_GetCompanyIncome_ReturnsTypeOfString()
+        {
+            //Arrange
+            string symbol = "AMZN";
+
+            //Act
+            var result = await _stockDataController.CompanyIncome(symbol);
+
+            //Assert
+            result.Should().BeOfType<OkObjectResult>();
+            (result as OkObjectResult)!.Value.Should().BeAssignableTo<string>();
+        }
+
 
     }
 }
