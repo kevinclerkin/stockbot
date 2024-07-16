@@ -71,5 +71,21 @@ namespace StockBotTests
             result.Should().BeOfType<OkObjectResult>();
             (result as OkObjectResult)!.Value.Should().BeAssignableTo<FinPrepDTO>();
         }
+
+        [Fact]
+        public async void StockData_GetCompanyMetrics_ReturnsTypeOfString()
+        {
+            //Arrange
+            string symbol = "NVDA";
+
+            //Act
+            var result = await _stockDataController.CompanyMetrics(symbol);
+
+            //Assert
+            result.Should().BeOfType<OkObjectResult>();
+            (result as OkObjectResult)!.Value.Should().BeAssignableTo<string>();
+        }
+
+
     }
 }
