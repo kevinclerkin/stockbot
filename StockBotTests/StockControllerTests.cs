@@ -10,16 +10,22 @@ namespace StockBotTests
 {
     public class StockControllerTests
     {
+        private readonly StockController _stockController;
+        private readonly IStockRepository _repository;
+
+        public StockControllerTests()
+        {
+            //Arrange
+            _repository = A.Fake<IStockRepository>();
+            _stockController = new StockController(_repository);
+        }
+
         [Fact]
         public async void GetStock_ReturnsOkObjectResult_AsTypeStock()
         {
-            //Arrange
-            var repository = A.Fake<IStockRepository>();
-
-            var stockController = new StockController(repository);
 
             //Act
-            var result = await stockController.GetStockAsync();
+            var result = await _stockController.GetStockAsync();
 
             //Assert
             result.Should().BeOfType<OkObjectResult>();
@@ -31,13 +37,9 @@ namespace StockBotTests
         [InlineData(1)]
         public async void GetById_ReturnsOkObjectResult_AsTypeStock(int id)
         {
-            //Arrange
-            var repository = A.Fake<IStockRepository>();
-
-            var stockController = new StockController(repository);
 
             //Act
-            var result = await stockController.GetById(id);
+            var result = await _stockController.GetById(id);
 
             //Assert
             result.Should().BeOfType<OkObjectResult>();
@@ -49,12 +51,10 @@ namespace StockBotTests
         {
             //Arrange
             var stockDTO = new CreateStockDTO();
-            var repository = A.Fake<IStockRepository>();
-
-            var stockController = new StockController(repository);
+            
 
             //Act
-            var result = await stockController.Create(stockDTO);
+            var result = await _stockController.Create(stockDTO);
 
             //Assert
             result.Should().BeOfType<CreatedAtActionResult>();
