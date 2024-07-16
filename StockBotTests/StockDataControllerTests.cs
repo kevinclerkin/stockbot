@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using StockBotAPI.Controllers;
+using StockBotAPI.DTO;
 using StockBotAPI.Interfaces;
 using StockBotAPI.Models;
 using System;
@@ -55,6 +56,20 @@ namespace StockBotTests
             //Assert
             result.Should().BeOfType<OkObjectResult>();
             (result as OkObjectResult)!.Value.Should().BeAssignableTo<Stock>();
+        }
+
+        [Fact]
+        public async void StockData_GetCompanyOverview_ReturnsTypeOfFinPrepDTO()
+        {
+            //Arrange
+            string symbol = "MSFT";
+
+            //Act
+            var result = await _stockDataController.CompanyOverview(symbol);
+
+            //Assert
+            result.Should().BeOfType<OkObjectResult>();
+            (result as OkObjectResult)!.Value.Should().BeAssignableTo<FinPrepDTO>();
         }
     }
 }
