@@ -29,7 +29,7 @@ namespace StockBotTests
 
             //Assert
             result.Should().BeOfType<OkObjectResult>();
-            result.Equals(typeof(Stock));
+            (result as OkObjectResult)!.Value.Should().BeAssignableTo<List<Stock>>();
             
         }
 
@@ -44,6 +44,7 @@ namespace StockBotTests
             //Assert
             result.Should().BeOfType<OkObjectResult>();
             result.Equals(typeof(Stock));
+            (result as OkObjectResult)!.Value.Should().BeAssignableTo<Stock>();
         }
 
         [Fact]
@@ -59,8 +60,8 @@ namespace StockBotTests
             //Assert
             result.Should().BeOfType<CreatedAtActionResult>();
             result.Equals(typeof(StockDTO));
-            result.Equals(typeof(Stock));
             result.Should().NotBeOfType<CreateStockDTO>();
+            (result as CreatedAtActionResult)!.Value.Should().BeAssignableTo<StockDTO>();
         }
     }
 }
