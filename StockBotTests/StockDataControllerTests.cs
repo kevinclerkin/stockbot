@@ -30,13 +30,13 @@ namespace StockBotTests
         {
             //Arrange
             string symbol = "AAPL";
+            string company = "Apple Inc";
+            A.CallTo(() => _finPrepService.GetStockBySymbol(symbol)).Returns(company);
 
             //Act
-            var result = await _finPrepService.GetStockBySymbol(symbol);
             var controllerResult = await _stockDataController.SearchCompany(symbol);
             
             //Assert
-            result.Should().BeOfType<string>();
             controllerResult.Should().BeOfType<OkObjectResult>();
             (controllerResult as OkObjectResult)!.Value.Should().BeAssignableTo<string>();
 
@@ -49,6 +49,8 @@ namespace StockBotTests
         {
             //Arrange
             string symbol = "TSLA";
+            var profiles = A.Fake<Stock>();
+            A.CallTo(() => _finPrepService.GetStockProfile(symbol)).Returns(profiles);
 
             //Act
             var result = await _stockDataController.CompanyProfile(symbol);
@@ -63,6 +65,8 @@ namespace StockBotTests
         {
             //Arrange
             string symbol = "MSFT";
+            var companyOverview = A.Fake<FinPrepDTO>();
+            A.CallTo(() => _finPrepService.GetCompanyOverview(symbol)).Returns(companyOverview);
 
             //Act
             var result = await _stockDataController.CompanyOverview(symbol);
@@ -77,7 +81,9 @@ namespace StockBotTests
         {
             //Arrange
             string symbol = "NVDA";
-
+            string companyMetrics = "Metrics";
+            A.CallTo(() => _finPrepService.GetKeyMetrics(symbol)).Returns(companyMetrics);
+            
             //Act
             var result = await _stockDataController.CompanyMetrics(symbol);
 
@@ -91,6 +97,8 @@ namespace StockBotTests
         {
             //Arrange
             string symbol = "AMZN";
+            string companyIncome = "Income";
+            A.CallTo(() => _finPrepService.GetIncomeStatement(symbol)).Returns(companyIncome);
 
             //Act
             var result = await _stockDataController.CompanyIncome(symbol);

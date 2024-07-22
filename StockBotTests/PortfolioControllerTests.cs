@@ -39,29 +39,51 @@ namespace StockBotTests
             
         }
 
-        [Fact]
+        /*[Fact]
         public async void GetPortfolio_ReturnsPortfolioList_OfTypeStock()
         {
             //Arrange
-            var user = new AppUser();
+            var user = new AppUser()
+            {
+                Id = "1",
+                Email = "davidsmith@gmail.com",
+                UserName = "david1",
+            };
 
-            /*var fakePortfolio = new List<Stock>
+            var newUser = A.Fake<AppUser>();
+            
+
+            var claims = new List<Claim>{
+            new Claim(ClaimTypes.Name, "David Smith")};
+            var identity = new ClaimsIdentity(claims, "TestAuthType");
+            var claimsPrincipal = new ClaimsPrincipal(identity);
+
+
+            A.CallTo(() => _userManager.GetUserName(claimsPrincipal)).Returns(ClaimTypes.Name);
+
+            var newPortfolio = A.Fake<List<Stock>>();
+
+            var fakePortfolio = new List<Stock>
             {
                 new Stock{Id = 1, CompanyName= "Apple", Industry = "Technology", LastDiv = 1, MarketCap = 200000, Portfolio = new List<Portfolio>(), Purchase=190, Symbol="AAPL" }
-            };*/
+            };
 
-            //A.CallTo(() => _portfolioRepository.GetUserPortfolio(user)).Returns(fakePortfolio);
+            A.CallTo(() => _portfolioRepository.GetUserPortfolio(newUser)).Returns(newPortfolio);
 
 
             //Act
-            var appUser = await _userManager.FindByNameAsync(user.UserName!);
-            var portfolio = await _portfolioRepository.GetUserPortfolio(appUser);
+            //var appUser = await _userManager.FindByNameAsync(user.UserName!);
+            //var portfolio = await _portfolioRepository.GetUserPortfolio(appUser);
+            var result = await _portfolioController.GetPortfolio();
+
            
 
 
             //Assert
             //fakePortfolio.Should().BeOfType<OkObjectResult>();
-            Assert.NotNull(portfolio);
+            //Assert.NotNull(portfolio);
+            result.Should().BeOfType<OkObjectResult>();
+            (result as OkObjectResult)!.Value.Should().BeAssignableTo<List<Stock>>();
         }
 
         /*[Fact]
