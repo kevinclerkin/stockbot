@@ -12,7 +12,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockBotTests
+namespace StockBotTests.Controllers
 {
     public class StockDataControllerTests
     {
@@ -35,12 +35,12 @@ namespace StockBotTests
 
             //Act
             var controllerResult = await _stockDataController.SearchCompany(symbol);
-            
+
             //Assert
             controllerResult.Should().BeOfType<OkObjectResult>();
             (controllerResult as OkObjectResult)!.Value.Should().BeAssignableTo<string>();
 
-            
+
 
         }
 
@@ -83,7 +83,7 @@ namespace StockBotTests
             string symbol = "NVDA";
             string companyMetrics = "Metrics";
             A.CallTo(() => _finPrepService.GetKeyMetrics(symbol)).Returns(companyMetrics);
-            
+
             //Act
             var result = await _stockDataController.CompanyMetrics(symbol);
 

@@ -6,7 +6,7 @@ using StockBotAPI.DTO;
 using StockBotAPI.Interfaces;
 using StockBotAPI.Models;
 
-namespace StockBotTests
+namespace StockBotTests.Controllers
 {
     public class StockControllerTests
     {
@@ -30,7 +30,7 @@ namespace StockBotTests
             //Assert
             result.Should().BeOfType<OkObjectResult>();
             (result as OkObjectResult)!.Value.Should().BeAssignableTo<List<Stock>>();
-            
+
         }
 
         [Theory]
@@ -52,7 +52,7 @@ namespace StockBotTests
         {
             //Arrange
             var stockDTO = new CreateStockDTO();
-            
+
 
             //Act
             var result = await _stockController.Create(stockDTO);

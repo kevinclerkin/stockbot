@@ -14,7 +14,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockBotTests
+namespace StockBotTests.Controllers
 {
     public class PortfolioControllerTests
     {
@@ -36,7 +36,7 @@ namespace StockBotTests
             _finPrepService = A.Fake<IFinPrepService>();
             _portfolioController = new PortfolioController(_userManager, _stockRepository, _portfolioRepository, _finPrepService);
 
-            
+
         }
 
         /*[Fact]
