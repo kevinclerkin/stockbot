@@ -59,5 +59,21 @@ namespace StockBotTests.Repositories
 
             
         }
+
+        [Fact]
+        public async void StockRepo_GetByIdAsync_ReturnsStock()
+        {
+            //Arrange
+            int Id = 1;
+            var dbContext = await GetDbContext();
+            var stockRepository = new StockRepository(dbContext);
+
+            //Act
+            var result = stockRepository.GetByIdAsync(Id);
+            
+            //Assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<Task<Stock>>();
+        }
     }
 }
