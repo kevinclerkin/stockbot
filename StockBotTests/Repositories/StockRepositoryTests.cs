@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 using StockBotAPI.Data;
 using StockBotAPI.Models;
+using StockBotAPI.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +24,10 @@ namespace StockBotTests.Repositories
             databaseContext.Database.EnsureCreated();
             if(await databaseContext.Stocks.CountAsync() <= 0)
             {
-                for(int i=0; i<10; i++)
-                {
-                    databaseContext.Stocks.Add(
+                databaseContext.Stocks.Add(
                         new Stock()
                         {
-                            Id = i,
+                            Id = 1,
                             Symbol = "AAPL",
                             CompanyName = "Apple",
                             MarketCap = 1000000,
@@ -37,11 +37,27 @@ namespace StockBotTests.Repositories
                             Purchase = 244
                         }
                         );
-                    await databaseContext.SaveChangesAsync();
-                }
-                
+                await databaseContext.SaveChangesAsync();
             }
             return databaseContext;
+        }
+
+        [Fact]
+        public async void StockRepo_GetAsync_ReturnsListOfStocks()
+        {
+            //Arrange
+            var dbContext = await GetDbContext();
+            var stockRepository = new StockRepository(dbContext);
+
+            //Act
+            var result = stockRepository.GetAsync();
+
+            //Assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<Task<List<Stock>>>();
+
+
+            
         }
     }
 }
