@@ -75,5 +75,21 @@ namespace StockBotTests.Repositories
             result.Should().NotBeNull();
             result.Should().BeOfType<Task<Stock>>();
         }
+
+        [Fact]
+        public async void StockRepo_GetBySymbolAsync_ReturnsStock()
+        {
+            //Arrange
+            string symbol = "AAPL";
+            var dbContext = await GetDbContext();
+            var stockRepository = new StockRepository(dbContext);
+
+            //Act
+            var result = stockRepository.GetBySymbolAsync(symbol);
+
+            //Assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<Task<Stock>>();
+        }
     }
 }
