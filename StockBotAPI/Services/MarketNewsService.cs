@@ -16,7 +16,7 @@ namespace StockBotAPI.Services
             _configuration = configuration;
         }
 
-        public async Task<StockNewsDTO> GetNews(string symbol)
+        public async Task<string> GetNews(string symbol)
         {
             try
             {
@@ -32,11 +32,9 @@ namespace StockBotAPI.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    var stockNews = JsonSerializer.Deserialize<StockNewsDTO[]>(content);
-                    var newsItem = stockNews?.FirstOrDefault();
-                    if(newsItem != null)
+                    if(content != null)
                     {
-                        return newsItem;
+                        return content;
                     }
                     return null;
 

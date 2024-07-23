@@ -4,6 +4,6 @@ namespace StockBotAPI.Interfaces
 {
     public interface IMarketNewsService
     {
-        Task<StockNewsDTO> GetNews(string symbol);
+        Task<string> GetNews(string symbol);
     }
 }
