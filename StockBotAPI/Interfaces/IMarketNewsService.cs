@@ -6,6 +6,6 @@ namespace StockBotAPI.Interfaces
     {
         Task<string> GetNews(string symbol);
 
-        Task<TrendingDTO> GetTrending();
+        Task<string> GetTrending();
     }
 }

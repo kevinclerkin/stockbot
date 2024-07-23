@@ -53,7 +53,7 @@ namespace StockBotAPI.Services
             }
         }
 
-        public async Task<TrendingDTO> GetTrending()
+        public async Task<string> GetTrending()
         {
             try
             {
@@ -63,17 +63,17 @@ namespace StockBotAPI.Services
                     throw new InvalidOperationException("API key for MarketAux is missing.");
                 }
 
-                var requestUrl = $"https://api.marketaux.com/v1/entity/trending/aggregation?countries=us,ca&min_doc_count=10&published_after=2024-07-22T14:39&language=en&api_token={apiKey}";
+                var requestUrl = $"https://api.marketaux.com/v1/entity/trending/aggregation?countries=us,ca&min_doc_count=2&published_after=2024-07-22T14:39&language=en&api_token={apiKey}";
                 var response = await _httpClient.GetAsync(requestUrl);
 
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    var trending = JsonSerializer.Deserialize<TrendingDTO[]>(content);
-                    var bestPick = trending?.FirstOrDefault();
-                    if (bestPick != null)
+                    //var trending = JsonSerializer.Deserialize<TrendingDTO[]>(content);
+                    //var bestPick = trending?.FirstOrDefault();
+                    if(content != null)
                     {
-                        return bestPick;
+                        return content;
                     }
                     return null;
 
