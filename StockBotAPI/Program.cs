@@ -50,7 +50,9 @@ builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IFinPrepService, FinPrepService>();
+builder.Services.AddScoped<IMarketNewsService, MarketNewsService>();
 builder.Services.AddHttpClient<IFinPrepService, FinPrepService>();
+builder.Services.AddHttpClient<IMarketNewsService, MarketNewsService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
