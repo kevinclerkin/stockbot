@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using FakeItEasy;
+using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using StockBotAPI.Data;
 using StockBotAPI.Models;
@@ -89,6 +90,21 @@ namespace StockBotTests.Repositories
 
             //Assert
             result.Should().NotBeNull();
+            result.Should().BeOfType<Task<Stock>>();
+        }
+
+        [Fact]
+        public async void StockRepo_CreateStockAsync_ReturnsStock()
+        {
+            //Arrange
+            var stock = A.Fake<Stock>();
+            var dbContext = await GetDbContext();
+            var stockRepository = new StockRepository(dbContext);
+
+            //Act
+            var result = stockRepository.CreateStockAsync(stock);
+
+            //Assert
             result.Should().BeOfType<Task<Stock>>();
         }
     }
