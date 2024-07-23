@@ -28,5 +28,18 @@ namespace StockBotAPI.Controllers
             
             return Ok(news);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetTrendingStock()
+        {
+            var trending = await _marketNewsService.GetTrending();
+
+            if(trending == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(trending);
+        }
     }
 }
