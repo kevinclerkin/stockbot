@@ -14,9 +14,36 @@ namespace StockBotAPI.Services
             _configuration = configuration;
         }
 
-        public Task<string> GetNews(string symbol)
+        public async Task<string> GetNews(string symbol)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var apiKey = _configuration["MarketAuxKey"];
+                if (string.IsNullOrEmpty(apiKey))
+                {
+                    throw new InvalidOperationException("API key for MarketAux is missing.");
+                }
+
+                var requestUrl = $" https://api.marketaux.com/v1/news/all?symbols={symbol}&filter_entities=true&language=en&api_token={apiKey}";
+                var response = await _httpClient.GetAsync(requestUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    return content;
+
+                }
+                else
+                {
+                    Console.WriteLine($"Error: {response.StatusCode}");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+                return null;
+            }
         }
     }
 }
