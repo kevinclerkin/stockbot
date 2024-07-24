@@ -51,8 +51,10 @@ builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IFinPrepService, FinPrepService>();
 builder.Services.AddScoped<IMarketNewsService, MarketNewsService>();
+builder.Services.AddScoped<IAlphaVService, AlphaVService>();
 builder.Services.AddHttpClient<IFinPrepService, FinPrepService>();
 builder.Services.AddHttpClient<IMarketNewsService, MarketNewsService>();
+builder.Services.AddHttpClient<IAlphaVService, AlphaVService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
