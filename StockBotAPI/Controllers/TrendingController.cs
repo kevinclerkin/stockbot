@@ -18,13 +18,26 @@ namespace StockBotAPI.Controllers
         [HttpGet("{query}")]
         public async Task<IActionResult> GetLatestNews(string query)
         {
-            var companies = await _alphaVService.GetTrendingNews(query);
-            if (companies == null)
+            var stockNews = await _alphaVService.GetTrendingNews(query);
+            if(stockNews == null)
             {
-                return NotFound();
+                return NotFound("No latest news found for this stock");
             }
 
-            return Ok(companies);
+            return Ok(stockNews);
+        }
+
+        [HttpGet("/sentiment{query}")]
+        public async Task<IActionResult> GetSentiment(string query)
+        {
+            var sentiment = await _alphaVService.GetSentiment(query);
+
+            if(sentiment == null)
+            {
+                return NotFound("No sentiment available");
+            }
+
+            return Ok(sentiment);
         }
     }
 }
