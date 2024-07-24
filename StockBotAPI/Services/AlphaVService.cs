@@ -107,6 +107,43 @@ namespace StockBotAPI.Services
 
             return null!;
         }
+
+        public async Task<Dictionary<string, dynamic>> GetGainersAndLosers()
+        {
+            try
+            {
+                var apiKey = _configuration["AVKey"];
+                if (string.IsNullOrEmpty(apiKey))
+                {
+                    throw new InvalidOperationException("API key for AlphaV is missing.");
+                }
+
+
+                var requestUrl = $"https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey={apiKey}";
+                
+                var response = await _httpClient.GetAsync(requestUrl);
+
+                response.EnsureSuccessStatusCode();
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                };
+
+
+                var jsonData = JsonSerializer.Deserialize<Dictionary<string, object>>(responseBody, options);
+
+                return jsonData!;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception: {e.Message}");
+                return null!;
+            }
+        }
     }
 
     

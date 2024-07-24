@@ -6,5 +6,7 @@
 
         Task<string> GetSentiment(string symbol);
 
+        Task<Dictionary<string, dynamic>> GetGainersAndLosers();
+
     }
 }
