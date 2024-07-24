@@ -39,6 +39,19 @@ namespace StockBotAPI.Controllers
 
             return Ok(sentiment);
         }
+
+        [HttpGet("/gainers-and-losers")]
+        public async Task<IActionResult> GetMarketSnapshot()
+        {
+            var snapshot = await _alphaVService.GetGainersAndLosers();
+
+            if(snapshot == null)
+            {
+                return NotFound("No data found for gainers and losers");
+            }
+
+            return Ok(snapshot);
+        }
     }
 }
 
