@@ -56,10 +56,58 @@ namespace StockBotAPI.Services
 
         }
 
-        public Task<string> GetSentiment(string symbol)
+        public async Task<string> GetSentiment(string symbol)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                var apiKey = _configuration["AVKey"];
+                if (string.IsNullOrEmpty(apiKey))
+                {
+                    throw new InvalidOperationException("API key for AlphaV is missing.");
+                }
 
+                var dateTime = DateTime.UtcNow - TimeSpan.FromHours(6);
+                string dateTimeString = dateTime.ToString("yyyyMMddTHHmm");
+
+                var requestUrl = $"https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers={symbol}" +
+                    $"&time_from={dateTimeString}&sort=RELEVANCE&apikey={apiKey}";
+                
+                var response = await _httpClient.GetAsync(requestUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+
+                    // Parse JSON and extract the overall_sentiment_label for the first article
+                    using (JsonDocument doc = JsonDocument.Parse(content))
+                    {
+                        JsonElement root = doc.RootElement;
+                        JsonElement feed;
+                        if (root.TryGetProperty("feed", out feed) && feed.GetArrayLength() > 0)
+                        {
+                            var firstArticle = feed[0];
+                            if (firstArticle.TryGetProperty("overall_sentiment_label", out JsonElement sentimentLabel))
+                            {
+                                return sentimentLabel.GetString()!;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Error: {response.StatusCode}");
+                    return null!;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception: {e.Message}");
+                return null!;
+            }
+
+            return null!;
+        }
     }
+
+    
 }
