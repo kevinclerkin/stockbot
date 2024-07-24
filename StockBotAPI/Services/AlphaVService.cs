@@ -78,7 +78,7 @@ namespace StockBotAPI.Services
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
-                    // Parse JSON and extract the overall_sentiment_label for the first article
+                    // Parse JSON and extract the overall_sentiment_label for the latest article
                     using (JsonDocument doc = JsonDocument.Parse(content))
                     {
                         JsonElement root = doc.RootElement;
