@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ActionConstraints;
+using Microsoft.EntityFrameworkCore.Storage;
 using StockBotAPI.DTO.NewsDTOs;
 using StockBotAPI.Interfaces;
 using System.Text.Json;
@@ -17,7 +18,7 @@ namespace StockBotAPI.Services
             _configuration = configuration;
         }
 
-        public async Task<string> GetNews(string symbol)
+        public async Task<Dictionary<string, dynamic>> GetNews(string symbol)
         {
             try
             {
@@ -33,27 +34,29 @@ namespace StockBotAPI.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    if(content != null)
+
+                    var stockNews = JsonSerializer.Deserialize<Dictionary<string, dynamic>>(content);
+                    if(stockNews != null)
                     {
-                        return content;
+                        return stockNews;
                     }
-                    return null;
+                    return null!;
 
                 }
                 else
                 {
                     Console.WriteLine($"Error: {response.StatusCode}");
-                    return null;
+                    return null!;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Exception: {ex.Message}");
-                return null;
+                return null!;
             }
         }
 
-        public async Task<string> GetTrending()
+        public async Task<Dictionary<string, dynamic>> GetTrending()
         {
             try
             {
@@ -71,23 +74,25 @@ namespace StockBotAPI.Services
                     var content = await response.Content.ReadAsStringAsync();
                     //var trending = JsonSerializer.Deserialize<TrendingDTO[]>(content);
                     //var bestPick = trending?.FirstOrDefault();
-                    if(content != null)
+
+                    var trending = JsonSerializer.Deserialize<Dictionary<string, dynamic>>(content);
+                    if(trending != null)
                     {
-                        return content;
+                        return trending;
                     }
-                    return null;
+                    return null!;
 
                 }
                 else
                 {
                     Console.WriteLine($"Error: {response.StatusCode}");
-                    return null;
+                    return null!;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Exception: {ex.Message}");
-                return null;
+                return null!;
             }
 
         }
