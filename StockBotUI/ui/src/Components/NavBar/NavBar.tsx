@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 
@@ -6,28 +5,28 @@ interface Props {}
 
 const NavBar = (props: Props) => {
   const {user, logoutUser, isLoggedIn} = AuthContext();
-    return (
+
+  
+  return (
       <nav className="relative container mx-auto p-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-20">
             <img src="" alt="" />
             <div className="hidden font-bold lg:flex">
-              <a href="" className="text-black hover:text-darkBlue">
-                <Link to="/search">
+              <Link to="/search" className="text-black hover:text-darkBlue">
                 Dashboard
-                </Link>
-              </a>
+              </Link>
             </div>
           </div>
           {isLoggedIn() ? (
              <div className="hidden lg:flex items-center space-x-6 text-back">
-             <div className="hover:text-darkBlue">{user?.username}</div>
-             <a
+             <div className="hover:text-darkBlue">{user?.email}</div>
+             <button
                onClick={() => logoutUser()}
                className="px-8 py-3 font-bold rounded text-white bg-lightGreen hover:opacity-70"
              >
                Logout
-             </a>
+             </button>
            </div>
            ) : (
             <div className="hidden lg:flex items-center space-x-6 text-back">

@@ -27,7 +27,7 @@ namespace StockBotAPI.Controllers
             return Ok(stockNews);
         }
 
-        [HttpGet("/sentiment{query}")]
+        [HttpGet("/sentiment/{query}")]
         public async Task<IActionResult> GetSentiment(string query)
         {
             var sentiment = await _alphaVService.GetSentiment(query);

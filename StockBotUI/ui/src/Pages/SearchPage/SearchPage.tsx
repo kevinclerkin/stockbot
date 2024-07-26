@@ -11,26 +11,25 @@ interface Props {}
 
 const SearchPage = (props: Props) => {
   const [search, setSearch] = React.useState<string>('');
-  const [searchResults, setSearchResults] = React.useState<Company[]>([]);
   const [portfolio, setPortfolio] = React.useState<GetPortfolio[] | null>([]);
+  const [searchResults, setSearchResults] = React.useState<Company[]>([]);
   const [serverError, setServerError] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    getPortfolio();
+  }, []);
 
   const onHandleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-    console.log(e);
-}
-
-React.useEffect(() => {
-  getPortfolio();
-}, []);
+};
 
 const getPortfolio = async () => {
   GetPortfolioFromAPI().then((res) => {
     if(res?.data) {
-      setPortfolio(res.data);
+      setPortfolio(res?.data);
     }
   }).catch((e) => {
-    console.log(e);
+    setPortfolio(null);
   });
 }
 
@@ -72,8 +71,8 @@ const onPortfolioRemove = (e: any) => {
     <>
       <Search onSearchSubmit={onSearchSubmit} search={search} onHandleSearchChange={onHandleSearchChange} />
       <PortfolioList portfolio={portfolio!} onPortfolioRemove={onPortfolioRemove}/>
-      {serverError && <h1>{serverError}</h1>}
       <CardList searchResults={searchResults} onPortfolioAdd={onPortfolioAdd} />
+      {serverError && <h1>{serverError}</h1>}
     </>
   )
 }
