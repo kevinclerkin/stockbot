@@ -11,7 +11,9 @@ const NavBar = (props: Props) => {
       <nav className="relative container mx-auto p-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-20">
-            <img src="" alt="" />
+            <Link to="/">
+            <img src="" alt="StockBot" />
+            </Link>
             <div className="hidden font-bold lg:flex">
               <Link to="/search" className="text-black hover:text-darkBlue">
                 Dashboard
