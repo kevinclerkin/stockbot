@@ -20,6 +20,7 @@ const PortfolioList = ({portfolio, onPortfolioRemove}: Props) => {
             portfolio.map((portfolioItem) => {
               return (
                 <CardPortfolio
+                  key={portfolioItem.id}
                   portfolioItem={portfolioItem}
                   onPortfolioRemove={onPortfolioRemove}
                 />

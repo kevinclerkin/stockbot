@@ -47,7 +47,7 @@ const onSearchSubmit = async (e: SyntheticEvent) => {
 const onPortfolioAdd = (e: any) => {
     e.preventDefault();
     AddPortfolioFromAPI(e.target[0].value).then((res) => {
-      if(res?.status === 204) {
+      if(res?.status === 200) {
         getPortfolio();
       }
     }).catch((e) => {
