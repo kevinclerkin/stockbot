@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using StockBotAPI.Data;
@@ -65,7 +66,10 @@ builder.Services.AddHttpClient<IAlphaVService, AlphaVService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
+                           Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+    
+    options.UseSqlServer(connectionString);
 });
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
@@ -98,8 +102,17 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = builder.Configuration["JWT:Audience"],
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(
-            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"]!))
+            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"] ??
+            Environment.GetEnvironmentVariable("JWT_SECRET_KEY")!))
     };
+});
+
+// Use environment variables for API keys
+builder.Services.Configure<APISettings>(options =>
+{
+    options.FMPKey = Environment.GetEnvironmentVariable("FMP_API_KEY");
+    options.AVKey = Environment.GetEnvironmentVariable("AV_API_KEY");
+    options.MarketAuxKey = Environment.GetEnvironmentVariable("AUX_API_KEY");
 });
 
 builder.Services.AddCors(options => options.AddPolicy(name:"StockBotPolicy",
