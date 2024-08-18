@@ -44,13 +44,13 @@ namespace StockBotAPI.Services
                 else
                 {
                     Console.WriteLine($"Error: {response.StatusCode}");
-                    return null;
+                    return null!;
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Exception: {e.Message}");
-                return null;
+                return null!;
             }
         }
 
@@ -76,19 +76,19 @@ namespace StockBotAPI.Services
                     {
                         return profile.ToStockFromFinPrep();
                     }
-                    return null;
+                    return null!;
 
                 }
                 else
                 {
                     Console.WriteLine($"Error: {result.StatusCode}");
-                    return null;
+                    return null!;
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Exception: {e.Message}");
-                return null;
+                return null!;
             }
         }
 
@@ -114,19 +114,19 @@ namespace StockBotAPI.Services
                     {
                         return profile;
                     }
-                    return null;
+                    return null!;
 
                 }
                 else
                 {
                     Console.WriteLine($"Error: {result.StatusCode}");
-                    return null;
+                    return null!;
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Exception: {e.Message}");
-                return null;
+                return null!;
             }
         }
 
@@ -152,13 +152,13 @@ namespace StockBotAPI.Services
                 else
                 {
                     Console.WriteLine($"Error: {response.StatusCode}");
-                    return null;
+                    return null!;
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Exception: {e.Message}");
-                return null;
+                return null!;
             }
         }
 
@@ -184,13 +184,13 @@ namespace StockBotAPI.Services
                 else
                 {
                     Console.WriteLine($"Error: {response.StatusCode}");
-                    return null;
+                    return null!;
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Exception: {e.Message}");
-                return null;
+                return null!;
             }
 
         }

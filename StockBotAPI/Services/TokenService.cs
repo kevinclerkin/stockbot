@@ -15,15 +15,15 @@ namespace StockBotAPI.Services
         public TokenService(IConfiguration configuration)
         {
             _configuration = configuration;
-            _securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"]));
+            _securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"]!));
             
         }
         public string CreateToken(AppUser appUser)
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Email, appUser.Email),
-                new Claim(JwtRegisteredClaimNames.Name, appUser.UserName)
+                new Claim(JwtRegisteredClaimNames.Email, appUser.Email!),
+                new Claim(JwtRegisteredClaimNames.Name, appUser.UserName!)
             };
 
             var encrypt = new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha512Signature);
