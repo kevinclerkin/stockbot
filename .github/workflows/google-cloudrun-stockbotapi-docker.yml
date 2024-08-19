@@ -10,6 +10,8 @@ env:
   GAR_LOCATION: europe-west1   # Replace with your Artifact Registry location
   SERVICE: stockbotapi         # Replace with your Cloud Run service name
   REGION:  europe-west1        # Replace with your Cloud Run service region
+  SERVICE_ACCOUNT: '' 
+  WORKLOAD_IDENTITY_PROVIDER: ''
 
 jobs:
   deploy:
@@ -21,11 +23,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Authenticate to Google Cloud
+      #- name: Authenticate to Google Cloud
+        #id: auth
+        #uses: google-github-actions/auth@v2
+        #with:
+          #credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - name: Google Auth
         id: auth
-        uses: google-github-actions/auth@v2
+        uses: 'google-github-actions/auth@v2'
         with:
-          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+          token_format: 'access_token'
+          project_id: ${{ env.PROJECT_ID }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
 
       # Authenticate Docker to Google Cloud Artifact Registry
       - name: Authenticate Docker
