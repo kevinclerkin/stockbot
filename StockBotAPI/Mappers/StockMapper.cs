@@ -45,11 +45,11 @@ namespace StockBotAPI.Mappers
         {
             return new Stock
             {
-                Symbol = finPrepStock.symbol,
-                CompanyName = finPrepStock.companyName,
+                Symbol = finPrepStock.symbol!,
+                CompanyName = finPrepStock.companyName!,
                 Purchase = (decimal)finPrepStock.price,
                 LastDiv = (decimal)finPrepStock.lastDiv,
-                Industry = finPrepStock.industry,
+                Industry = finPrepStock.industry!,
                 MarketCap = finPrepStock.mktCap
             };
         }

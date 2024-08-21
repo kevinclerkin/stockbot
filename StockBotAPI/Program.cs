@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using StockBotAPI.Data;
@@ -13,11 +12,11 @@ using StockBotAPI.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Explicitly configure URLs to listen on ports 8080 and 8081
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(8080);
-    options.ListenAnyIP(8081);
-});
+//builder.WebHost.ConfigureKestrel(options =>
+//{
+    //options.ListenAnyIP(8080);
+    //options.ListenAnyIP(8081);
+//});
 
 // Add services to the container.
 
@@ -66,9 +65,8 @@ builder.Services.AddHttpClient<IAlphaVService, AlphaVService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
-                           Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
-    
+    var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+
     options.UseSqlServer(connectionString);
 });
 
@@ -102,8 +100,7 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = builder.Configuration["JWT:Audience"],
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(
-            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"] ??
-            Environment.GetEnvironmentVariable("JWT_SECRET_KEY")!))
+            System.Text.Encoding.UTF8.GetBytes(builder.Configuration[Environment.GetEnvironmentVariable("JWT_SECRET_KEY")!]!))
     };
 });
 
