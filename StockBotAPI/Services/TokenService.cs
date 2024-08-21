@@ -15,7 +15,7 @@ namespace StockBotAPI.Services
         public TokenService(IConfiguration configuration)
         {
             _configuration = configuration;
-            _securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"]!));
+            _securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT_SECRET_KEY"]!));
             
         }
         public string CreateToken(AppUser appUser)
