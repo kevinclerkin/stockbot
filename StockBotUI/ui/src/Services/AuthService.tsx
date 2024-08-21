@@ -1,7 +1,7 @@
 import axios from "axios"
 import { UserToken } from "../AuthTypes"
 
-const API = "https://localhost:7297/api"
+const API = "https://stockbotapi-b4u2s7hk5q-ew.a.run.app/api"
 
 export const toLoginAPI = async (username: string, password: string) =>{
     try{

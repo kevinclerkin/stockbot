@@ -1,7 +1,7 @@
 import axios from "axios"
 import { GetPortfolio, PostPortfolio } from "../Models/Portfolio"
 
-const API = "https://localhost:7297/api/portfolio"
+const API = "https://stockbotapi-b4u2s7hk5q-ew.a.run.app/api/portfolio"
 
 
 export const GetPortfolioFromAPI = async () => {
