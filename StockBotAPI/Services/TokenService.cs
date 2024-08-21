@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Server.IIS.Core;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using StockBotAPI.Interfaces;
 using StockBotAPI.Models;
 using System.IdentityModel.Tokens.Jwt;

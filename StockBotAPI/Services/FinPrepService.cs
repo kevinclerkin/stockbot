@@ -3,7 +3,6 @@ using StockBotAPI.Interfaces;
 using StockBotAPI.Mappers;
 using StockBotAPI.Models;
 using System.Text.Json;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 
 namespace StockBotAPI.Services
@@ -26,7 +25,7 @@ namespace StockBotAPI.Services
         {
             try
             {
-                var apiKey = _configuration["FMPKey"];
+                var apiKey = _configuration["FMP_API_KEY"];
                 if (string.IsNullOrEmpty(apiKey))
                 {
                     throw new InvalidOperationException("API key for Financial Modeling Prep is missing.");
@@ -58,7 +57,7 @@ namespace StockBotAPI.Services
         {
             try
             {
-                var apiKey = _configuration["FMPKey"];
+                var apiKey = _configuration["FMP_API_KEY"];
                 if (string.IsNullOrEmpty(apiKey))
                 {
                     throw new InvalidOperationException("API key for Financial Modeling Prep is missing.");
@@ -96,7 +95,7 @@ namespace StockBotAPI.Services
         {
             try
             {
-                var apiKey = _configuration["FMPKey"];
+                var apiKey = _configuration["FMP_API_KEY"];
                 if (string.IsNullOrEmpty(apiKey))
                 {
                     throw new InvalidOperationException("API key for Financial Modeling Prep is missing.");
@@ -134,7 +133,7 @@ namespace StockBotAPI.Services
         {
             try
             {
-                var apiKey = _configuration["FMPKey"];
+                var apiKey = _configuration["FMP_API_KEY"];
                 if (string.IsNullOrEmpty(apiKey))
                 {
                     throw new InvalidOperationException("API key for Financial Modeling Prep is missing.");
@@ -166,7 +165,7 @@ namespace StockBotAPI.Services
         {
             try
             {
-                var apiKey = _configuration["FMPKey"];
+                var apiKey = _configuration["FMP_API_KEY"];
                 if (string.IsNullOrEmpty(apiKey))
                 {
                     throw new InvalidOperationException("API key for Financial Modeling Prep is missing.");

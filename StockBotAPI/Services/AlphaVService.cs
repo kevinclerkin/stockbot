@@ -21,7 +21,7 @@ namespace StockBotAPI.Services
         {
             try
             {
-                var apiKey = _configuration["AVKey"];
+                var apiKey = _configuration["AV_API_KEY"];
                 if (string.IsNullOrEmpty(apiKey))
                 {
                     throw new InvalidOperationException("API key for Alpha V is missing.");
@@ -60,7 +60,7 @@ namespace StockBotAPI.Services
         {
             try
             {
-                var apiKey = _configuration["AVKey"];
+                var apiKey = _configuration["AV_API_KEY"];
                 if (string.IsNullOrEmpty(apiKey))
                 {
                     throw new InvalidOperationException("API key for AlphaV is missing.");
@@ -112,7 +112,7 @@ namespace StockBotAPI.Services
         {
             try
             {
-                var apiKey = _configuration["AVKey"];
+                var apiKey = _configuration["AV_API_KEY"];
                 if (string.IsNullOrEmpty(apiKey))
                 {
                     throw new InvalidOperationException("API key for AlphaV is missing.");

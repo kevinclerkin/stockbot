@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ActionConstraints;
-using Microsoft.EntityFrameworkCore.Storage;
-using StockBotAPI.DTO.NewsDTOs;
-using StockBotAPI.Interfaces;
+﻿using StockBotAPI.Interfaces;
 using System.Text.Json;
 
 namespace StockBotAPI.Services
@@ -22,7 +19,7 @@ namespace StockBotAPI.Services
         {
             try
             {
-                var apiKey = _configuration["MarketAuxKey"];
+                var apiKey = _configuration["AUX_API_KEY"];
                 if (string.IsNullOrEmpty(apiKey))
                 {
                     throw new InvalidOperationException("API key for MarketAux is missing.");
@@ -60,7 +57,7 @@ namespace StockBotAPI.Services
         {
             try
             {
-                var apiKey = _configuration["MarketAuxKey"];
+                var apiKey = _configuration["AUX_API_KEY"];
                 if (string.IsNullOrEmpty(apiKey))
                 {
                     throw new InvalidOperationException("API key for MarketAux is missing.");
