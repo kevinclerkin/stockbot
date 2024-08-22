@@ -68,3 +68,6 @@ Thumbs.db
 
 #Test Results
 /TestResults
+
+#Firebase
+.firebase
