@@ -115,7 +115,7 @@ builder.Services.Configure<APISettings>(options =>
 builder.Services.AddCors(options => options.AddPolicy(name:"StockBotPolicy",
   policy =>
   {
-      policy.WithOrigins("http://localhost:3000", "https://stockbot-432823.web.app/")
+      policy.WithOrigins("http://localhost:3000", "https://stockbot-432823.web.app")
       .AllowAnyMethod()
       .AllowAnyHeader()
       .AllowCredentials();
