@@ -8,7 +8,7 @@ type UserContextType = {
     user: UserProfile | null;
     token: string | null;
     registerUser(username: string, email: string, password: string): Promise<void>;
-    loginUser(username: string, password: string): Promise<void>;
+    loginUser(username: string, password: string): Promise<boolean>;
     logoutUser(): void;
     isLoggedIn(): boolean;
 
@@ -70,9 +70,11 @@ export const UserProvider = ({children}: Props) => {
               setToken(res?.token!);
               setUser(userObj!);
               navigate("/search");
+              return true;
             }
           })
-          .catch((e) => ("Login failed. Check your credentials and try again")); 
+          .catch((e) => ("Login failed. Check your credentials and try again"));
+          return false; 
     };
 
     const isLoggedIn = () => {

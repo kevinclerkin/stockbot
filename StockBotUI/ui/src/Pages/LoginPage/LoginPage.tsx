@@ -20,12 +20,22 @@ const validation = Yup.object().shape({
 
 const LoginPage = (props: Props) => {
     const {loginUser} = AuthContext();
+    const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
     const { register, handleSubmit, formState: { errors } } = useForm<LoginFormInputs>({
         resolver: yupResolver(validation)
     });
 
-    const handleLogin = (data: LoginFormInputs) => {
-        loginUser(data.username, data.password);
+    const handleLogin = async (data: LoginFormInputs) => {
+      try {
+        const success = await loginUser(data.username, data.password);
+        if (!success) {
+            setErrorMessage('Invalid username or password');
+        } else {
+            setErrorMessage(null); 
+        }
+    } catch (error) {
+        setErrorMessage("An unexpected error occured. Please try again!");
+    }
     }
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
@@ -79,6 +89,14 @@ const LoginPage = (props: Props) => {
                 ""
               )}
             </div>
+
+             
+             {errorMessage && (
+                <p className="text-lightGreen text-sm">
+                  {errorMessage}
+                </p>)
+             }
+
             <button
               type="submit"
               className="w-full text-white bg-lightGreen hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
