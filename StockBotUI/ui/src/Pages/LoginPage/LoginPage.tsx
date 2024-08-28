@@ -54,7 +54,7 @@ const LoginPage = (props: Props) => {
                 {...register("username")}
               />
               {errors.username ? (
-                <p className="text-white">{errors.username.message}</p>
+                <p className="text-lightGreen">{errors.username.message}</p>
               ) : (
                 ""
               )}
@@ -74,7 +74,7 @@ const LoginPage = (props: Props) => {
                 {...register("password")}
               />
               {errors.password ? (
-                <p className="text-white">{errors.password.message}</p>
+                <p className="text-lightGreen">{errors.password.message}</p>
               ) : (
                 ""
               )}
