@@ -53,7 +53,7 @@ export const UserProvider = ({children}: Props) => {
             }
         
         })
-          .catch((e) => ("Server error occured"));
+          .catch((e) => ("Registration failed. Please try again"));
     
     };
 
@@ -72,7 +72,7 @@ export const UserProvider = ({children}: Props) => {
               navigate("/search");
             }
           })
-          .catch((e) => ("Server error occured"));
+          .catch((e) => ("Login failed. Check your credentials and try again")); 
     };
 
     const isLoggedIn = () => {
