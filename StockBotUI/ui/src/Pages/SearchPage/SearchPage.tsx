@@ -23,7 +23,7 @@ const SearchPage = (props: Props) => {
     setSearch(e.target.value);
 };
 
-const getPortfolio = async () => {
+const getPortfolio = () => {
   GetPortfolioFromAPI().then((res) => {
     if(res?.data) {
       setPortfolio(res?.data);

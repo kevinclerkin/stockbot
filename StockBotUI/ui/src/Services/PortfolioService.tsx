@@ -2,6 +2,7 @@ import axios from "axios"
 import { GetPortfolio, PostPortfolio } from "../Models/Portfolio"
 
 const API = "https://stockbotapi-b4u2s7hk5q-ew.a.run.app/api/portfolio"
+//const API2 = "https://localhost:7297/api/portfolio"
 
 
 export const GetPortfolioFromAPI = async () => {
@@ -17,7 +18,7 @@ export const GetPortfolioFromAPI = async () => {
 
 export const AddPortfolioFromAPI = async (symbol: string) => {
     try {
-        const data = await axios.post<PostPortfolio>(API + `?symbol=${symbol}`)
+        const data = await axios.post<PostPortfolio>(API  + `?symbol=${symbol}`)
         return data
     }
     catch(error) {
