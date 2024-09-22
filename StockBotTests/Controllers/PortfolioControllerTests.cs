@@ -1,5 +1,4 @@
-﻿using Azure.Identity;
-using FakeItEasy;
+﻿using FakeItEasy;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -7,12 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using StockBotAPI.Controllers;
 using StockBotAPI.Interfaces;
 using StockBotAPI.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace StockBotTests.Controllers
 {
@@ -39,7 +34,7 @@ namespace StockBotTests.Controllers
 
         }
 
-        /*[Fact]
+        [Fact(Skip = "Conflict with static claims extensions method in extensions")]
         public async void GetPortfolio_ReturnsPortfolioList_OfTypeStock()
         {
             //Arrange
@@ -72,21 +67,21 @@ namespace StockBotTests.Controllers
 
 
             //Act
-            //var appUser = await _userManager.FindByNameAsync(user.UserName!);
-            //var portfolio = await _portfolioRepository.GetUserPortfolio(appUser);
+            var appUser = await _userManager.FindByNameAsync(user.UserName!);
+            var portfolio = await _portfolioRepository.GetUserPortfolio(appUser!);
             var result = await _portfolioController.GetPortfolio();
 
            
 
 
             //Assert
-            //fakePortfolio.Should().BeOfType<OkObjectResult>();
-            //Assert.NotNull(portfolio);
+            fakePortfolio.Should().BeOfType<OkObjectResult>();
+            Assert.NotNull(portfolio);
             result.Should().BeOfType<OkObjectResult>();
             (result as OkObjectResult)!.Value.Should().BeAssignableTo<List<Stock>>();
         }
 
-        /*[Fact]
+        [Fact(Skip = "Conflict with static claims extensions method in extensions")]
         public async Task CreatePortfolio_ReturnsBadRequest_WhenStockDoesNotExist()
         {
             // Mock User
@@ -105,15 +100,15 @@ namespace StockBotTests.Controllers
             var userName = "testuser";
             var appUser = new AppUser { UserName = userName };
 
-            A.CallTo(() => _userManager.FindByNameAsync(userName)).Returns(Task.FromResult(appUser));
-            A.CallTo(() => _stockRepository.GetBySymbolAsync(symbol)).Returns(Task.FromResult<Stock>(null));
-            A.CallTo(() => _finPrepService.GetStockProfile(symbol)).Returns(Task.FromResult<Stock>(null));
+            A.CallTo(() => _userManager.FindByNameAsync(userName))!.Returns(Task.FromResult(appUser));
+            A.CallTo(() => _stockRepository.GetBySymbolAsync(symbol))!.Returns(Task.FromResult<Stock>(null!));
+            A.CallTo(() => _finPrepService.GetStockProfile(symbol)).Returns(Task.FromResult<Stock>(null!));
 
             // Act
             var result = await _portfolioController.CreatePortfolio(symbol);
 
             // Assert
             result.Should().BeOfType<BadRequestObjectResult>().Which.Value.Should().Be("Stock does not exist");
-        }*/
+        }
     }
 }

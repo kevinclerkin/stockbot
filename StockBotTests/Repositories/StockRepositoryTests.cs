@@ -4,12 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using StockBotAPI.Data;
 using StockBotAPI.Models;
 using StockBotAPI.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace StockBotTests.Repositories
 {
@@ -22,7 +17,9 @@ namespace StockBotTests.Repositories
                 .Options;
 
             var databaseContext = new ApplicationDbContext(options);
+            
             databaseContext.Database.EnsureCreated();
+            
             if(await databaseContext.Stocks.CountAsync() <= 0)
             {
                 databaseContext.Stocks.Add(
